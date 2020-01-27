@@ -1,65 +1,19 @@
-import React, { Fragment, useState } from 'react';
-import { Route } from 'react-router-dom';
+import React from 'react';
+import styled from 'styled-components';
 
-import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
-import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert';
-import Header from '../Header/Header';
-import SignUp from '../SignUp/SignUp';
-import SignIn from '../SignIn/SignIn';
-import SignOut from '../SignOut/SignOut';
-import ChangePassword from '../ChangePassword/ChangePassword';
-import Home from '../Home/Home';
-
-const DesktopContainer = () => {
-  const [user, setUser] = useState(null);
-  const [alerts, setAlerts] = useState([]);
-
-  const clearUser = () => setUser(null);
-
-  const alert = ({ heading, message, variant }) => {
-    setAlerts(() => [...alerts, { heading, message, variant }]);
-  };
+export default function DesktopContainer({ children }) {
   return (
-    <Fragment>
-      <Header user={user} />
-      {alerts.map((alert, index) => (
-        <AutoDismissAlert
-          key={index}
-          heading={alert.heading}
-          variant={alert.variant}
-          message={alert.message}
-        />
-      ))}
-      <main className="container">
-        <AuthenticatedRoute
-          user={user}
-          path="/home"
-          render={() => <Home user={user} clearUser={clearUser} />}
-        />
-
-        <Route
-          path="/sign-up"
-          render={() => <SignUp alert={alert} setUser={setUser} />}
-        />
-        <Route
-          path="/sign-in"
-          render={() => <SignIn alert={alert} setUser={setUser} />}
-        />
-        <AuthenticatedRoute
-          user={user}
-          path="/sign-out"
-          render={() => (
-            <SignOut alert={alert} clearUser={clearUser} user={user} />
-          )}
-        />
-        <AuthenticatedRoute
-          user={user}
-          path="/change-password"
-          render={() => <ChangePassword alert={alert} user={user} />}
-        />
-      </main>
-    </Fragment>
+    <Container>
+      <h1>DesktopContainer Component</h1>
+      {children}
+    </Container>
   );
-};
+}
 
-export default DesktopContainer;
+const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  border: dashed;
+  display: flex;
+  flex-direction: column;
+`;
