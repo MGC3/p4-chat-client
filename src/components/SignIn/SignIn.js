@@ -1,52 +1,55 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import { signIn } from '../../api/auth'
-import messages from '../AutoDismissAlert/messages'
+import { signIn } from '../../api/auth';
+import messages from '../AutoDismissAlert/messages';
 
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 class SignIn extends Component {
-  constructor () {
-    super()
+  constructor() {
+    super();
 
     this.state = {
       email: '',
       password: ''
-    }
+    };
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event =>
+    this.setState({
+      [event.target.name]: event.target.value
+    });
 
   onSignIn = event => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const { alert, history, setUser } = this.props
+    const { alert, history, setUser } = this.props;
 
     signIn(this.state)
       .then(res => setUser(res.data.user))
-      .then(() => alert({
-        heading: 'Sign In Success',
-        message: messages.signInSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push('/'))
+      .then(() =>
+        alert({
+          heading: 'Sign In Success',
+          message: messages.signInSuccess,
+          variant: 'success'
+        })
+      )
+      .then(() => history.push('/home'))
       .catch(error => {
-        console.error(error)
-        this.setState({ email: '', password: '' })
+        console.error(error);
+        this.setState({ email: '', password: '' });
         alert({
           heading: 'Sign In Failed',
           message: messages.signInFailure,
           variant: 'danger'
-        })
-      })
-  }
+        });
+      });
+  };
 
-  render () {
-    const { email, password } = this.state
+  render() {
+    const { email, password } = this.state;
 
     return (
       <div className="row">
@@ -75,17 +78,14 @@ class SignIn extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-            >
+            <Button variant="primary" type="submit">
               Submit
             </Button>
           </Form>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(SignIn)
+export default withRouter(SignIn);
