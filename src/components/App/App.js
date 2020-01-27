@@ -1,34 +1,39 @@
-import React, { Component, Fragment } from 'react'
-import { Route } from 'react-router-dom'
+import React, { Component, Fragment } from 'react';
+import { Route } from 'react-router-dom';
+import io from 'socket.io-client';
 
-import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
-import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
-import Header from '../Header/Header'
-import SignUp from '../SignUp/SignUp'
-import SignIn from '../SignIn/SignIn'
-import SignOut from '../SignOut/SignOut'
-import ChangePassword from '../ChangePassword/ChangePassword'
+import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
+import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert';
+import Header from '../Header/Header';
+import SignUp from '../SignUp/SignUp';
+import SignIn from '../SignIn/SignIn';
+import SignOut from '../SignOut/SignOut';
+import ChangePassword from '../ChangePassword/ChangePassword';
 
 class App extends Component {
-  constructor () {
-    super()
+  constructor() {
+    super();
 
     this.state = {
       user: null,
       alerts: []
-    }
+    };
+
+    let socket = io.connect('http://localhost:4741');
   }
 
-  setUser = user => this.setState({ user })
+  setUser = user => this.setState({ user });
 
-  clearUser = () => this.setState({ user: null })
+  clearUser = () => this.setState({ user: null });
 
   alert = ({ heading, message, variant }) => {
-    this.setState({ alerts: [...this.state.alerts, { heading, message, variant }] })
-  }
+    this.setState({
+      alerts: [...this.state.alerts, { heading, message, variant }]
+    });
+  };
 
-  render () {
-    const { alerts, user } = this.state
+  render() {
+    const { alerts, user } = this.state;
 
     return (
       <Fragment>
@@ -42,22 +47,34 @@ class App extends Component {
           />
         ))}
         <main className="container">
-          <Route path='/sign-up' render={() => (
-            <SignUp alert={this.alert} setUser={this.setUser} />
-          )} />
-          <Route path='/sign-in' render={() => (
-            <SignIn alert={this.alert} setUser={this.setUser} />
-          )} />
-          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
-            <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
-          )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword alert={this.alert} user={user} />
-          )} />
+          <Route
+            path="/sign-up"
+            render={() => <SignUp alert={this.alert} setUser={this.setUser} />}
+          />
+          <Route
+            path="/sign-in"
+            render={() => <SignIn alert={this.alert} setUser={this.setUser} />}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path="/sign-out"
+            render={() => (
+              <SignOut
+                alert={this.alert}
+                clearUser={this.clearUser}
+                user={user}
+              />
+            )}
+          />
+          <AuthenticatedRoute
+            user={user}
+            path="/change-password"
+            render={() => <ChangePassword alert={this.alert} user={user} />}
+          />
         </main>
       </Fragment>
-    )
+    );
   }
 }
 
-export default App
+export default App;
