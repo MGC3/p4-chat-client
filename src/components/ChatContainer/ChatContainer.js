@@ -8,6 +8,16 @@ export default function ChatContainer({ socket }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
 
+  useEffect(() => {
+    socket.on('newMessage', msg => {
+      handleNewMessage(msg);
+    });
+  }, []);
+
+  const handleNewMessage = msg => {
+    setMessages(messages => [...messages, msg]);
+  };
+
   const handleClick = () => {
     socket.emit('chat message', inputRef.current.value);
     inputRef.current.value = '';
@@ -18,16 +28,6 @@ export default function ChatContainer({ socket }) {
       socket.emit('chat message', inputRef.current.value);
       inputRef.current.value = '';
     }
-  };
-
-  useEffect(() => {
-    socket.on('newMessage', msg => {
-      handleNewMessage(msg);
-    });
-  }, []);
-
-  const handleNewMessage = msg => {
-    setMessages(messages => [...messages, msg]);
   };
 
   return (
