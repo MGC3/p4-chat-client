@@ -3,24 +3,28 @@ import styled from 'styled-components';
 import ChatForm from './ChatForm';
 import ChatMessages from './ChatMessages';
 import Draggable from 'react-draggable';
-import { getMessages } from '../../api/messages';
+import { getMessages, createMessage, getMessage } from '../../api/messages';
 
 export default function ChatContainer({ socket, user }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
 
   useEffect(() => {
+    // when socket.io tells me a new message has arrived
+    // get all messages again so I see the new messages
     socket.on('newMessage', msg => {
-      handleNewMessage(msg);
+      onGetMessages();
     });
 
+    // when the page first loads, get all messages
     onGetMessages();
   }, []);
 
   const onGetMessages = () => {
     getMessages(user)
-      // TODO: setMessages the array?
-      .then(console.log)
+      .then(res => {
+        setMessages(res.data.messages);
+      })
       .catch(console.error);
   };
 
@@ -29,13 +33,39 @@ export default function ChatContainer({ socket, user }) {
   };
 
   const handleClick = () => {
-    socket.emit('chat message', inputRef.current.value);
+    // POST to /messages
+    createMessage(inputRef.current.value, user)
+      .then(res => {
+        // GET single message at /messages/:id
+        return getMessage(res.data.message._id, user);
+      })
+      .then(res => {
+        // set the new message
+        handleNewMessage(res.data.message);
+      })
+      // then tell socket.io about it
+      .then(() => {
+        socket.emit('chat message', inputRef.current.value);
+      });
     inputRef.current.value = '';
   };
 
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
-      socket.emit('chat message', inputRef.current.value);
+      // POST to /messages
+      createMessage(inputRef.current.value, user)
+        .then(res => {
+          // GET single message at /messages/:id
+          return getMessage(res.data.message._id, user);
+        })
+        .then(res => {
+          // set the new message
+          handleNewMessage(res.data.message);
+        })
+        // then tell socket.io about it
+        .then(() => {
+          socket.emit('chat message', inputRef.current.value);
+        });
       inputRef.current.value = '';
     }
   };

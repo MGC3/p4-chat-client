@@ -5,10 +5,9 @@ const ChatMessages = ({ messages }) => {
   return (
     <List>
       {messages &&
-        messages.map((message, idx) => (
-          <Message key={idx}>
-            {message}
-            {/* <UserName>{message.username}</UserName>: {message.content} */}
+        messages.map(message => (
+          <Message key={message._id}>
+            <ScreenName>{message.owner.screenName}</ScreenName>: {message.text}
           </Message>
         ))}
     </List>
@@ -21,7 +20,7 @@ const List = styled.ul`
   padding: 0;
 `;
 
-const UserName = styled.span`
+const ScreenName = styled.span`
   color: blue;
 `;
 
