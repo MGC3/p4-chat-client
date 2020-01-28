@@ -1,5 +1,5 @@
-import apiUrl from '../apiConfig'
-import axios from 'axios'
+import apiUrl from '../apiConfig';
+import axios from 'axios';
 
 export const signUp = credentials => {
   return axios({
@@ -9,11 +9,12 @@ export const signUp = credentials => {
       credentials: {
         email: credentials.email,
         password: credentials.password,
-        password_confirmation: credentials.passwordConfirmation
+        password_confirmation: credentials.passwordConfirmation,
+        screenName: credentials.screenName
       }
     }
-  })
-}
+  });
+};
 
 export const signIn = credentials => {
   return axios({
@@ -25,25 +26,25 @@ export const signIn = credentials => {
         password: credentials.password
       }
     }
-  })
-}
+  });
+};
 
 export const signOut = user => {
   return axios({
     url: apiUrl + '/sign-out',
     method: 'DELETE',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      Authorization: `Token token=${user.token}`
     }
-  })
-}
+  });
+};
 
 export const changePassword = (passwords, user) => {
   return axios({
     url: apiUrl + '/change-password',
     method: 'PATCH',
     headers: {
-      'Authorization': `Token token=${user.token}`
+      Authorization: `Token token=${user.token}`
     },
     data: {
       passwords: {
@@ -51,5 +52,5 @@ export const changePassword = (passwords, user) => {
         new: passwords.newPassword
       }
     }
-  })
-}
+  });
+};

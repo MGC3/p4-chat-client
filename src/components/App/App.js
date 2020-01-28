@@ -5,6 +5,7 @@ import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert';
 import DesktopContainer from '../DesktopContainer/DesktopContainer';
 import ChatContainer from '../ChatContainer/ChatContainer';
 import SignIn from '../SignIn/SignIn';
+import SignUp from '../SignUp/SignUp';
 import TaskBar from '../TaskBar/TaskBar';
 import ChatAppContainer from '../ChatAppContainer/ChatAppContainer';
 
@@ -34,6 +35,15 @@ const App = ({ socket }) => {
         render={() => (
           <ChatAppContainer>
             <SignIn alert={alert} setUser={setUser} />
+          </ChatAppContainer>
+        )}
+      />
+      <Route
+        exact
+        path="/sign-up"
+        render={() => (
+          <ChatAppContainer>
+            <SignUp alert={alert} setUser={setUser} />
           </ChatAppContainer>
         )}
       />
