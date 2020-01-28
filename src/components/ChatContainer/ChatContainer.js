@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import ChatForm from './ChatForm';
 import ChatMessages from './ChatMessages';
@@ -20,9 +20,16 @@ export default function ChatContainer({ socket }) {
     }
   };
 
-  socket.on('newMessage', msg => {
-    setMessages(() => [...messages, msg]);
-  });
+  useEffect(() => {
+    socket.on('newMessage', msg => {
+      console.log(msg);
+      handleNewMessage(msg);
+    });
+  }, []);
+
+  const handleNewMessage = msg => {
+    setMessages(messages => [...messages, msg]);
+  };
 
   return (
     <Draggable handle=".chat-app-drag" defaultPosition={{ x: 250, y: -380 }}>
