@@ -6,6 +6,7 @@ import DesktopContainer from '../DesktopContainer/DesktopContainer';
 import ChatContainer from '../ChatContainer/ChatContainer';
 import SignIn from '../SignIn/SignIn';
 import TaskBar from '../TaskBar/TaskBar';
+import ChatAppContainer from '../ChatAppContainer/ChatAppContainer';
 
 const App = ({ socket }) => {
   const [user, setUser] = useState(null);
@@ -30,13 +31,20 @@ const App = ({ socket }) => {
       <Route
         exact
         path="/"
-        render={() => <SignIn alert={alert} setUser={setUser} />}
+        render={() => (
+          <ChatAppContainer>
+            <SignIn alert={alert} setUser={setUser} />
+          </ChatAppContainer>
+        )}
       />
       <AuthenticatedRoute
         user={user}
         path="/home"
         render={() => (
-          <ChatContainer socket={socket} user={user} clearUser={clearUser} />
+          <div>
+            <ChatAppContainer>Authed</ChatAppContainer>
+            <ChatContainer socket={socket} user={user} clearUser={clearUser} />
+          </div>
         )}
       />
       <TaskBar />
