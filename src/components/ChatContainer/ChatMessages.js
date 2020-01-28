@@ -1,20 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const messages = [
-  { username: 'B username', content: 'a test message' },
-  { username: 'A', content: 'a test message' },
-  { username: 'B', content: 'a test message' },
-  { username: 'A', content: 'a test message' }
-];
-// const ChatMessages = ({ messages }) => {
-const ChatMessages = () => {
+const ChatMessages = ({ messages }) => {
   return (
     <List>
       {messages &&
         messages.map((message, idx) => (
           <Message key={idx}>
-            <UserName>{message.username}</UserName>: {message.content}
+            {message}
+            {/* <UserName>{message.username}</UserName>: {message.content} */}
           </Message>
         ))}
     </List>
