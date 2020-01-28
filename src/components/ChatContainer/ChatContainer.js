@@ -22,7 +22,6 @@ export default function ChatContainer({ socket }) {
 
   useEffect(() => {
     socket.on('newMessage', msg => {
-      console.log(msg);
       handleNewMessage(msg);
     });
   }, []);
