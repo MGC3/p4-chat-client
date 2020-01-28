@@ -5,6 +5,7 @@ import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert';
 import DesktopContainer from '../DesktopContainer/DesktopContainer';
 import ChatContainer from '../ChatContainer/ChatContainer';
 import SignIn from '../SignIn/SignIn';
+import TaskBar from '../TaskBar/TaskBar';
 
 const App = ({ socket }) => {
   const [user, setUser] = useState(null);
@@ -26,7 +27,6 @@ const App = ({ socket }) => {
           message={alert.message}
         />
       ))}
-      <h1>Test</h1>
       <Route
         exact
         path="/"
@@ -39,6 +39,7 @@ const App = ({ socket }) => {
           <ChatContainer socket={socket} user={user} clearUser={clearUser} />
         )}
       />
+      <TaskBar />
     </DesktopContainer>
   );
 };
