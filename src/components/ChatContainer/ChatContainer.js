@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import ChatForm from './ChatForm';
 import ChatMessages from './ChatMessages';
 import Draggable from 'react-draggable';
+import { getMessages } from '../../api/messages';
 
-export default function ChatContainer({ socket }) {
+export default function ChatContainer({ socket, user }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
 
@@ -12,7 +13,16 @@ export default function ChatContainer({ socket }) {
     socket.on('newMessage', msg => {
       handleNewMessage(msg);
     });
+
+    onGetMessages();
   }, []);
+
+  const onGetMessages = () => {
+    getMessages(user)
+      // TODO: setMessages the array?
+      .then(console.log)
+      .catch(console.error);
+  };
 
   const handleNewMessage = msg => {
     setMessages(messages => [...messages, msg]);
