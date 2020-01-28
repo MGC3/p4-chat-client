@@ -5,7 +5,8 @@ import './index.scss';
 import App from './components/App/App';
 import { HashRouter } from 'react-router-dom';
 import io from 'socket.io-client';
-let socket = io.connect('http://localhost:4741');
+import apiUrl from './apiConfig';
+let socket = io.connect(apiUrl);
 
 const appJsx = (
   <HashRouter>
