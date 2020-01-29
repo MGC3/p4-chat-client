@@ -55,7 +55,7 @@ const App = ({ socket }) => {
         render={() => (
           <div>
             <ChatAppContainer>
-              <ChatRoomList />
+              <ChatRoomList user={user} />
             </ChatAppContainer>
             <ChatContainer socket={socket} user={user} clearUser={clearUser} />
           </div>

@@ -15,3 +15,13 @@ export const createChatRoom = (chatroom, user) => {
     }
   });
 };
+
+export const getChatRooms = user => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/chatrooms',
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  });
+};

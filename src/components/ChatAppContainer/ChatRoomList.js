@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { getChatRooms } from '../../api/chatrooms';
 
-const rooms = ['Hi', 'Hello', 'test', 'Hi', 'Hello', 'test'];
 const buddies = ['DudeBroChill', 'Bro', 'test', 'Hi', 'Hello', 'test'];
 
-const ChatRoomList = () => {
+const ChatRoomList = ({ user }) => {
+  const [chatRooms, setChatRooms] = useState([]);
+  useEffect(() => {
+    onGetChatRooms();
+  }, []);
+
+  const onGetChatRooms = () => {
+    getChatRooms(user)
+      .then(res => {
+        setChatRooms(res.data.chatrooms);
+      })
+      .catch(console.error);
+  };
+
   return (
     <List>
       <b>ChatRooms</b>
-      {rooms &&
-        rooms.map((room, idx) => <Room key={idx}>Chatroom {idx + 1}</Room>)}
+      {chatRooms &&
+        chatRooms.map(chatRoom => (
+          <Room key={chatRoom._id}>{chatRoom.name}</Room>
+        ))}
       <b>Buddies (6/6)</b>
       {buddies &&
         buddies.map((buddie, idx) => <Room key={idx}>Buddy {idx + 1}</Room>)}
