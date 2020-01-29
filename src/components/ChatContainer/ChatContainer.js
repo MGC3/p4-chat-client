@@ -4,8 +4,9 @@ import ChatForm from './ChatForm';
 import ChatMessages from './ChatMessages';
 import Draggable from 'react-draggable';
 import { getMessages, createMessage } from '../../api/messages';
+import { getChatRoom } from '../../api/chatrooms';
 
-export default function ChatContainer({ socket, user }) {
+export default function ChatContainer({ socket, user, chatRoomId }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
@@ -26,9 +27,11 @@ export default function ChatContainer({ socket, user }) {
   };
 
   const onGetMessages = () => {
-    getMessages(user)
+    getChatRoom(chatRoomId, user)
       .then(res => {
-        setMessages(res.data.messages);
+        // TODO: realized that this gets all chatrooms, want to get one chatroom
+        console.warn(res.data.chatroom);
+        setMessages(res.data.chatroom.messages);
         scrollToBottom();
       })
       .catch(console.error);
@@ -36,7 +39,7 @@ export default function ChatContainer({ socket, user }) {
 
   const handleClick = () => {
     // POST to /messages
-    createMessage(inputRef.current.value, user)
+    createMessage(inputRef.current.value, chatRoomId, user)
       // then tell socket.io about it
       .then(() => {
         socket.emit('chat message', inputRef.current.value);
@@ -50,7 +53,7 @@ export default function ChatContainer({ socket, user }) {
       // stop the enter key from entering a linebreak
       e.preventDefault();
       // POST to /messages
-      createMessage(inputRef.current.value, user)
+      createMessage(inputRef.current.value, chatRoomId, user)
         // then tell socket.io about it
         .then(() => {
           socket.emit('chat message', inputRef.current.value);

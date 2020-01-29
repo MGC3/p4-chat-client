@@ -16,6 +16,16 @@ export const createChatRoom = (chatroom, user) => {
   });
 };
 
+export const getChatRoom = (chatRoomId, user) => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/chatrooms/' + chatRoomId,
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  });
+};
+
 export const getChatRooms = user => {
   return axios({
     method: 'GET',

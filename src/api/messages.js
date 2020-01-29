@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getMessages = user => {
   return axios({
     method: 'GET',
-    url: apiUrl + '/messages',
+    url: apiUrl + '/chatrooms',
     headers: {
       Authorization: `Token token=${user.token}`
     }
@@ -22,7 +22,7 @@ export const getMessage = (id, user) => {
   });
 };
 
-export const createMessage = (text, user) => {
+export const createMessage = (text, chatRoomId, user) => {
   return axios({
     url: apiUrl + '/messages',
     method: 'POST',
@@ -31,7 +31,8 @@ export const createMessage = (text, user) => {
     },
     data: {
       message: {
-        text: text
+        text: text,
+        chatRoomId: chatRoomId
       }
     }
   });
