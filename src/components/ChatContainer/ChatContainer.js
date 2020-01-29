@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ChatForm from './ChatForm';
 import ChatMessages from './ChatMessages';
 import Draggable from 'react-draggable';
-import { getMessages, createMessage, getMessage } from '../../api/messages';
+import { getMessages, createMessage } from '../../api/messages';
 
 export default function ChatContainer({ socket, user }) {
   const [messages, setMessages] = useState([]);

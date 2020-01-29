@@ -10,6 +10,8 @@ export const getMessages = user => {
     }
   });
 };
+
+// TODO: remove this if we aren't using it later...
 export const getMessage = (id, user) => {
   return axios({
     method: 'GET',
