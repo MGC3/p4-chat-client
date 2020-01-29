@@ -7,7 +7,7 @@ const ChatMessages = ({ messages, bottomRef }) => {
       {messages &&
         messages.map(message => (
           <Message key={message._id}>
-            <ScreenName>{message.owner.screenName}</ScreenName>: {message.text}
+            <ScreenName>{message.screenName}</ScreenName>: {message.text}
           </Message>
         ))}
       <div ref={bottomRef}></div>

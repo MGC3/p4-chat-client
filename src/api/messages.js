@@ -32,7 +32,8 @@ export const createMessage = (text, chatRoomId, user) => {
     data: {
       message: {
         text: text,
-        chatRoomId: chatRoomId
+        chatRoomId: chatRoomId,
+        screenName: user.screenName
       }
     }
   });
