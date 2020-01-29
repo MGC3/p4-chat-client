@@ -14,6 +14,8 @@ import CreateChatRoom from '../CreateChatRoom/CreateChatRoom';
 const App = ({ socket }) => {
   const [user, setUser] = useState(null);
   const [alerts, setAlerts] = useState([]);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatRoomId, setChatRoomId] = useState(null);
 
   const clearUser = () => setUser(null);
 
@@ -57,7 +59,15 @@ const App = ({ socket }) => {
             <ChatAppContainer>
               <ChatRoomList user={user} history={history} />
             </ChatAppContainer>
-            <ChatContainer socket={socket} user={user} clearUser={clearUser} />
+            {chatOpen && chatRoomId && (
+              <ChatContainer
+                socket={socket}
+                chatRoomId={chatRoomId}
+                setChatOpen={setChatOpen}
+                user={user}
+                clearUser={clearUser}
+              />
+            )}
           </div>
         )}
       />
