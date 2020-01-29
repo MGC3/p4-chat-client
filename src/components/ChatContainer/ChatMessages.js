@@ -16,8 +16,12 @@ const ChatMessages = ({ messages }) => {
 
 export default ChatMessages;
 
-const List = styled.ul`
-  padding: 0;
+const List = styled.div`
+  overflow: scroll;
+  height: 250px;
+  border: dashed;
+  padding: 8px;
+  margin: 8px;
 `;
 
 const ScreenName = styled.span`

@@ -52,6 +52,8 @@ export default function ChatContainer({ socket, user }) {
 
   const handleKeyPress = e => {
     if (e.key === 'Enter') {
+      // stop the enter key from entering a linebreak
+      e.preventDefault();
       // POST to /messages
       createMessage(inputRef.current.value, user)
         .then(res => {
@@ -75,10 +77,9 @@ export default function ChatContainer({ socket, user }) {
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>
-          <TitleText>Instant Messenger</TitleText>
+          <TitleText>Instant Messenger | ChatContainer Component</TitleText>
           <CloseIcon>X</CloseIcon>
         </TitleBarContainer>
-        <h1>ChatContainer Component</h1>
         <ChatMessages messages={messages} />
         <ChatForm
           handleKeyPress={handleKeyPress}
@@ -95,7 +96,6 @@ const Container = styled.div`
   height: 450px;
   border: dashed;
   position: absolute;
-  overflow: scroll;
 `;
 
 const TitleBarContainer = styled.div`
@@ -109,7 +109,7 @@ const TitleBarContainer = styled.div`
 `;
 
 const TitleText = styled.p`
-  color: white;
+  color: black;
   /* abstract font into main css typography */
   font-family: 'Tahoma';
 `;
