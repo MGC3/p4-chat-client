@@ -25,3 +25,13 @@ export const getChatRooms = user => {
     }
   });
 };
+
+export const deleteChatRoom = (chatRoomId, user) => {
+  return axios({
+    url: apiUrl + '/chatrooms/' + chatRoomId,
+    method: 'DELETE',
+    headers: {
+      Authorization: `Token token=${user.token}`
+    }
+  });
+};

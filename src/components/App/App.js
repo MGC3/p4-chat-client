@@ -52,10 +52,10 @@ const App = ({ socket }) => {
       <AuthenticatedRoute
         user={user}
         path="/home"
-        render={() => (
+        render={({ history }) => (
           <div>
             <ChatAppContainer>
-              <ChatRoomList user={user} />
+              <ChatRoomList user={user} history={history} />
             </ChatAppContainer>
             <ChatContainer socket={socket} user={user} clearUser={clearUser} />
           </div>
