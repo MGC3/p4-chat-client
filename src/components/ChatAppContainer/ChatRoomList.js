@@ -5,7 +5,7 @@ import { getChatRooms, deleteChatRoom } from '../../api/chatrooms';
 
 const buddies = ['DudeBroChill', 'Bro', 'test', 'Hi', 'Hello', 'test'];
 
-const ChatRoomList = ({ user, history }) => {
+const ChatRoomList = ({ user, setChatRoomId, setChatOpen }) => {
   const [chatRooms, setChatRooms] = useState([]);
   useEffect(() => {
     onGetChatRooms();
@@ -24,7 +24,6 @@ const ChatRoomList = ({ user, history }) => {
       .then(() => {
         onGetChatRooms();
       })
-      // .then(history.push('/home'))
       .catch(console.error);
   };
 
@@ -34,7 +33,14 @@ const ChatRoomList = ({ user, history }) => {
       {chatRooms &&
         chatRooms.map(chatRoom => (
           <Room key={chatRoom._id}>
-            {chatRoom.name}{' '}
+            <span
+              onClick={() => {
+                setChatRoomId(chatRoom._id);
+                setChatOpen(true);
+              }}
+            >
+              {chatRoom.name}
+            </span>{' '}
             <span onClick={() => handleDelete(chatRoom._id)}>
               - Delete Room
             </span>

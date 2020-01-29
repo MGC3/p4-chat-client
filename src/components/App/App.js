@@ -57,7 +57,12 @@ const App = ({ socket }) => {
         render={({ history }) => (
           <div>
             <ChatAppContainer>
-              <ChatRoomList user={user} history={history} />
+              <ChatRoomList
+                user={user}
+                history={history}
+                setChatOpen={setChatOpen}
+                setChatRoomId={setChatRoomId}
+              />
             </ChatAppContainer>
             {chatOpen && chatRoomId && (
               <ChatContainer
