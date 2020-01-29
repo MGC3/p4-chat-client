@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getChatRooms } from '../../api/chatrooms';
 
@@ -20,7 +21,7 @@ const ChatRoomList = ({ user }) => {
 
   return (
     <List>
-      <b>ChatRooms</b>
+      <b>ChatRooms</b> <Link to="/create-chatroom">+ Create Room</Link>
       {chatRooms &&
         chatRooms.map(chatRoom => (
           <Room key={chatRoom._id}>{chatRoom.name}</Room>
