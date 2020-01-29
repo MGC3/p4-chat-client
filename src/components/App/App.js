@@ -9,6 +9,7 @@ import SignUp from '../SignUp/SignUp';
 import TaskBar from '../TaskBar/TaskBar';
 import ChatAppContainer from '../ChatAppContainer/ChatAppContainer';
 import ChatRoomList from '../ChatAppContainer/ChatRoomList';
+import CreateChatRoom from '../CreateChatRoom/CreateChatRoom';
 
 const App = ({ socket }) => {
   const [user, setUser] = useState(null);
@@ -60,6 +61,24 @@ const App = ({ socket }) => {
           </div>
         )}
       />
+      <AuthenticatedRoute
+        user={user}
+        path="/create-chatroom"
+        render={() => (
+          <div>
+            <ChatAppContainer>
+              <CreateChatRoom user={user} alert={alert} clearUser={clearUser} />
+            </ChatAppContainer>
+            <ChatContainer
+              alert={alert}
+              socket={socket}
+              user={user}
+              clearUser={clearUser}
+            />
+          </div>
+        )}
+      />
+
       <TaskBar />
     </DesktopContainer>
   );
