@@ -34,25 +34,14 @@ export default function ChatContainer({ socket, user }) {
       .catch(console.error);
   };
 
-  const handleNewMessage = msg => {
-    setMessages(messages => [...messages, msg]);
-  };
-
   const handleClick = () => {
     // POST to /messages
     createMessage(inputRef.current.value, user)
-      .then(res => {
-        // GET single message at /messages/:id
-        return getMessage(res.data.message._id, user);
-      })
-      .then(res => {
-        // set the new message
-        handleNewMessage(res.data.message);
-      })
       // then tell socket.io about it
       .then(() => {
         socket.emit('chat message', inputRef.current.value);
-      });
+      })
+      .catch(() => console.warn('Error creating message'));
     inputRef.current.value = '';
   };
 
@@ -62,18 +51,11 @@ export default function ChatContainer({ socket, user }) {
       e.preventDefault();
       // POST to /messages
       createMessage(inputRef.current.value, user)
-        .then(res => {
-          // GET single message at /messages/:id
-          return getMessage(res.data.message._id, user);
-        })
-        .then(res => {
-          // set the new message
-          handleNewMessage(res.data.message);
-        })
         // then tell socket.io about it
         .then(() => {
           socket.emit('chat message', inputRef.current.value);
-        });
+        })
+        .catch(() => console.warn('Error creating message'));
       inputRef.current.value = '';
     }
   };
