@@ -61,7 +61,7 @@ export default function ChatContainer({ socket, user }) {
   };
 
   return (
-    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 250, y: -380 }}>
+    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 250, y: -480 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>

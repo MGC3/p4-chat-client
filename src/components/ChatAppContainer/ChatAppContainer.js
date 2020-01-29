@@ -4,15 +4,32 @@ import Draggable from 'react-draggable';
 
 const ChatAppContainer = ({ children }) => {
   return (
-    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 850, y: 70 }}>
+    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 850, y: 0 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>
           <TitleText>Sign On</TitleText>
           <CloseIcon>X</CloseIcon>
         </TitleBarContainer>
-        <h2>ChatApp Container</h2>
         {children}
+        <IconGroup>
+          <TestIcon>
+            <TestImage />
+            <TestText>Setup</TestText>
+          </TestIcon>
+          <TestIcon>
+            <TestImage />
+            <TestText>Setup</TestText>
+          </TestIcon>
+          <TestIcon>
+            <TestImage />
+            <TestText>Setup</TestText>
+          </TestIcon>
+          <TestIcon>
+            <TestImage />
+            <TestText>Setup</TestText>
+          </TestIcon>
+        </IconGroup>
       </Container>
     </Draggable>
   );
@@ -21,8 +38,8 @@ const ChatAppContainer = ({ children }) => {
 export default ChatAppContainer;
 
 const Container = styled.div`
-  width: 300px;
-  height: 450px;
+  width: 264px;
+  height: 550px;
   border: dashed;
 `;
 
@@ -56,4 +73,38 @@ const Icon = styled.div`
   height: 100%;
   width: 32px;
   margin-right: 32px;
+`;
+
+const IconGroup = styled.div`
+  width: 264px;
+  height: 72px;
+  border: dashed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+`;
+
+const TestIcon = styled.div`
+  width: 72px;
+  height: 72px;
+  border: dashed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const TestImage = styled.img`
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  border: dashed red;
+`;
+
+const TestText = styled.p`
+  color: black;
+  margin: 0;
+  padding: 0;
 `;

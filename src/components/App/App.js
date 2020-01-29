@@ -8,6 +8,7 @@ import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
 import TaskBar from '../TaskBar/TaskBar';
 import ChatAppContainer from '../ChatAppContainer/ChatAppContainer';
+import ChatRoomList from '../ChatAppContainer/ChatRoomList';
 
 const App = ({ socket }) => {
   const [user, setUser] = useState(null);
@@ -52,7 +53,9 @@ const App = ({ socket }) => {
         path="/home"
         render={() => (
           <div>
-            <ChatAppContainer>Authed</ChatAppContainer>
+            <ChatAppContainer>
+              <ChatRoomList />
+            </ChatAppContainer>
             <ChatContainer socket={socket} user={user} clearUser={clearUser} />
           </div>
         )}
