@@ -8,6 +8,7 @@ import { getMessages, createMessage, getMessage } from '../../api/messages';
 export default function ChatContainer({ socket, user }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
+  const bottomRef = useRef(null);
 
   useEffect(() => {
     // when socket.io tells me a new message has arrived
@@ -20,10 +21,15 @@ export default function ChatContainer({ socket, user }) {
     onGetMessages();
   }, []);
 
+  const scrollToBottom = () => {
+    bottomRef.current.scrollIntoView();
+  };
+
   const onGetMessages = () => {
     getMessages(user)
       .then(res => {
         setMessages(res.data.messages);
+        scrollToBottom();
       })
       .catch(console.error);
   };
@@ -80,7 +86,7 @@ export default function ChatContainer({ socket, user }) {
           <TitleText>Instant Messenger | ChatContainer Component</TitleText>
           <CloseIcon>X</CloseIcon>
         </TitleBarContainer>
-        <ChatMessages messages={messages} />
+        <ChatMessages messages={messages} bottomRef={bottomRef} />
         <ChatForm
           handleKeyPress={handleKeyPress}
           inputRef={inputRef}

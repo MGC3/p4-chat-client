@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ChatMessages = ({ messages }) => {
+const ChatMessages = ({ messages, bottomRef }) => {
   return (
     <List>
       {messages &&
@@ -10,6 +10,7 @@ const ChatMessages = ({ messages }) => {
             <ScreenName>{message.owner.screenName}</ScreenName>: {message.text}
           </Message>
         ))}
+      <div ref={bottomRef}></div>
     </List>
   );
 };
