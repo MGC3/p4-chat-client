@@ -10,21 +10,35 @@ export default function ChatContainer({
   socket,
   user,
   chatRoomId,
-  setChatOpen
+  setChatOpen,
+  chatRoomName
 }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    // when socket.io tells me a new message has arrived
-    // get all messages again so I see the new messages
-    socket.on('newMessage', msg => {
+    // if socket.io tells me this chatroom has a new message...
+    // get all messages, so I see the new messages
+    socket.on('new chat message', () => {
       onGetMessages();
+    });
+
+    socket.on('join success', () => {
+      console.log('IO knows somebody joined a channel');
+    });
+
+    socket.on('user left chatroom', () => {
+      console.log('IO knows somebody left this room');
     });
 
     // when the page first loads, get all messages
     onGetMessages();
+
+    // when the component unmounts, tell socket.io so it can remove us from the room
+    return () => {
+      socket.emit('leave chatroom', chatRoomName);
+    };
   }, []);
 
   const scrollToBottom = () => {
@@ -34,8 +48,7 @@ export default function ChatContainer({
   const onGetMessages = () => {
     getChatRoom(chatRoomId, user)
       .then(res => {
-        // TODO: realized that this gets all chatrooms, want to get one chatroom
-        console.warn(res.data.chatroom);
+        socket.emit('join chatroom', chatRoomName);
         setMessages(res.data.chatroom.messages);
         scrollToBottom();
       })
@@ -47,7 +60,7 @@ export default function ChatContainer({
     createMessage(inputRef.current.value, chatRoomId, user)
       // then tell socket.io about it
       .then(() => {
-        socket.emit('chat message', inputRef.current.value);
+        socket.emit('send chat message', chatRoomName);
       })
       .catch(() => console.warn('Error creating message'));
     inputRef.current.value = '';
@@ -61,7 +74,7 @@ export default function ChatContainer({
       createMessage(inputRef.current.value, chatRoomId, user)
         // then tell socket.io about it
         .then(() => {
-          socket.emit('chat message', inputRef.current.value);
+          socket.emit('send chat message', chatRoomName);
         })
         .catch(() => console.warn('Error creating message'));
       inputRef.current.value = '';
@@ -77,7 +90,7 @@ export default function ChatContainer({
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>
-          <TitleText>Instant Messenger | ChatContainer Component</TitleText>
+          <TitleText>Instant Messenger | {chatRoomName}</TitleText>
           <CloseIcon onClick={() => handleClose()}>X</CloseIcon>
         </TitleBarContainer>
         <ChatMessages messages={messages} bottomRef={bottomRef} />

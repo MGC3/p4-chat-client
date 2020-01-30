@@ -5,7 +5,13 @@ import { getChatRooms, deleteChatRoom } from '../../api/chatrooms';
 
 const buddies = ['DudeBroChill', 'Bro', 'test', 'Hi', 'Hello', 'test'];
 
-const ChatRoomList = ({ user, setChatRoomId, setChatOpen, chatOpen }) => {
+const ChatRoomList = ({
+  user,
+  setChatRoomId,
+  setChatOpen,
+  chatOpen,
+  setChatRoomName
+}) => {
   const [chatRooms, setChatRooms] = useState([]);
   useEffect(() => {
     onGetChatRooms();
@@ -27,7 +33,7 @@ const ChatRoomList = ({ user, setChatRoomId, setChatOpen, chatOpen }) => {
       .catch(console.error);
   };
 
-  const handleClickChatRoom = chatRoomId => {
+  const handleClickChatRoom = (chatRoomId, chatRoomName) => {
     // if a current chat window is open, close it
     if (chatOpen) {
       setChatOpen(false);
@@ -35,6 +41,7 @@ const ChatRoomList = ({ user, setChatRoomId, setChatOpen, chatOpen }) => {
       // else let the chat window component mount
       setChatRoomId(chatRoomId);
       setChatOpen(true);
+      setChatRoomName(chatRoomName);
     }
   };
 
@@ -44,7 +51,9 @@ const ChatRoomList = ({ user, setChatRoomId, setChatOpen, chatOpen }) => {
       {chatRooms &&
         chatRooms.map(chatRoom => (
           <Room key={chatRoom._id}>
-            <span onClick={() => handleClickChatRoom(chatRoom._id)}>
+            <span
+              onClick={() => handleClickChatRoom(chatRoom._id, chatRoom.name)}
+            >
               {chatRoom.name}
             </span>{' '}
             <span onClick={() => handleDelete(chatRoom._id)}>

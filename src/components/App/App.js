@@ -16,6 +16,7 @@ const App = ({ socket }) => {
   const [alerts, setAlerts] = useState([]);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatRoomId, setChatRoomId] = useState(null);
+  const [chatRoomName, setChatRoomName] = useState('');
 
   const clearUser = () => setUser(null);
 
@@ -63,6 +64,7 @@ const App = ({ socket }) => {
                 chatOpen={chatOpen}
                 setChatOpen={setChatOpen}
                 setChatRoomId={setChatRoomId}
+                setChatRoomName={setChatRoomName}
               />
             </ChatAppContainer>
             {chatOpen && chatRoomId && (
@@ -72,6 +74,7 @@ const App = ({ socket }) => {
                 setChatOpen={setChatOpen}
                 user={user}
                 clearUser={clearUser}
+                chatRoomName={chatRoomName}
               />
             )}
           </div>
