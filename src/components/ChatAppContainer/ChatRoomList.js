@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getChatRooms, deleteChatRoom } from '../../api/chatrooms';
@@ -57,19 +57,19 @@ const ChatRoomList = ({
       {chatRooms &&
         chatRooms.map(chatRoom => (
           <Room key={chatRoom._id}>
-            <span
+            <RoomName
               onClick={() => handleClickChatRoom(chatRoom._id, chatRoom.name)}
             >
               {chatRoom.name}
-            </span>{' '}
+            </RoomName>{' '}
             {user._id === chatRoom.owner && (
-              <React.Fragment>
+              <ButtonGroup>
                 <span onClick={() => handleDelete(chatRoom._id)}>- Delete</span>
 
                 <span onClick={() => handleClickUpdate(chatRoom._id)}>
                   Update
                 </span>
-              </React.Fragment>
+              </ButtonGroup>
             )}
           </Room>
         ))}
@@ -93,4 +93,16 @@ const List = styled.div`
 
 const Room = styled.div`
   font-family: 'Times New Roman', Times, serif;
+  display: flex;
+`;
+
+const RoomName = styled.div`
+  cursor: pointer;
+  max-width: 100px;
+  overflow-wrap: break-word;
+`;
+
+const ButtonGroup = styled.div`
+  cursor: pointer;
+  margin-left: auto;
 `;

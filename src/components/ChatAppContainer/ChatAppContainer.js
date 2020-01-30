@@ -74,9 +74,11 @@ const TitleBarContainer = styled.div`
 `;
 
 const TitleText = styled.p`
-  color: black;
+  color: ${props => props.theme.white};
   /* TODO: abstract font into main css typography */
   font-family: 'Tahoma';
+  margin-bottom: 0;
+  cursor: default;
 `;
 
 const CloseIcon = styled.button`
