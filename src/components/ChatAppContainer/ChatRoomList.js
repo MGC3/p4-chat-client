@@ -5,7 +5,7 @@ import { getChatRooms, deleteChatRoom } from '../../api/chatrooms';
 
 const buddies = ['DudeBroChill', 'Bro', 'test', 'Hi', 'Hello', 'test'];
 
-const ChatRoomList = ({ user, setChatRoomId, setChatOpen }) => {
+const ChatRoomList = ({ user, setChatRoomId, setChatOpen, chatOpen }) => {
   const [chatRooms, setChatRooms] = useState([]);
   useEffect(() => {
     onGetChatRooms();
@@ -27,18 +27,24 @@ const ChatRoomList = ({ user, setChatRoomId, setChatOpen }) => {
       .catch(console.error);
   };
 
+  const handleClickChatRoom = chatRoomId => {
+    // if a current chat window is open, close it
+    if (chatOpen) {
+      setChatOpen(false);
+    } else {
+      // else let the chat window component mount
+      setChatRoomId(chatRoomId);
+      setChatOpen(true);
+    }
+  };
+
   return (
     <List>
       <b>ChatRooms</b> <Link to="/create-chatroom">+ Create Room</Link>
       {chatRooms &&
         chatRooms.map(chatRoom => (
           <Room key={chatRoom._id}>
-            <span
-              onClick={() => {
-                setChatRoomId(chatRoom._id);
-                setChatOpen(true);
-              }}
-            >
+            <span onClick={() => handleClickChatRoom(chatRoom._id)}>
               {chatRoom.name}
             </span>{' '}
             <span onClick={() => handleDelete(chatRoom._id)}>

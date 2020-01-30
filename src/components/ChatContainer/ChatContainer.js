@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import ChatForm from './ChatForm';
 import ChatMessages from './ChatMessages';
 import Draggable from 'react-draggable';
-import { getMessages, createMessage } from '../../api/messages';
+import { createMessage } from '../../api/messages';
 import { getChatRoom } from '../../api/chatrooms';
 
-export default function ChatContainer({ socket, user, chatRoomId }) {
+export default function ChatContainer({
+  socket,
+  user,
+  chatRoomId,
+  setChatOpen
+}) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
@@ -63,13 +68,17 @@ export default function ChatContainer({ socket, user, chatRoomId }) {
     }
   };
 
+  const handleClose = () => {
+    setChatOpen(false);
+  };
+
   return (
     <Draggable handle=".chat-app-drag" defaultPosition={{ x: 250, y: -480 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>
           <TitleText>Instant Messenger | ChatContainer Component</TitleText>
-          <CloseIcon>X</CloseIcon>
+          <CloseIcon onClick={() => handleClose()}>X</CloseIcon>
         </TitleBarContainer>
         <ChatMessages messages={messages} bottomRef={bottomRef} />
         <ChatForm

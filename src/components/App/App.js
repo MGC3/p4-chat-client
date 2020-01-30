@@ -60,6 +60,7 @@ const App = ({ socket }) => {
               <ChatRoomList
                 user={user}
                 history={history}
+                chatOpen={chatOpen}
                 setChatOpen={setChatOpen}
                 setChatRoomId={setChatRoomId}
               />
