@@ -26,6 +26,7 @@ export default function ChatContainer({
   const bottomRef = useRef(null);
 
   useEffect(() => {
+    socket.emit('join chatroom', chatRoomName);
     // if socket.io tells me this chatroom has a new message...
     // get all messages, so I see the new messages
     socket.on('new chat message', () => {
@@ -57,7 +58,6 @@ export default function ChatContainer({
   const onGetMessages = () => {
     getChatRoom(chatRoomId, user)
       .then(res => {
-        socket.emit('join chatroom', chatRoomName);
         setMessages(res.data.chatroom.messages);
         scrollToBottom();
       })
