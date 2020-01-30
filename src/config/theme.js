@@ -1,3 +1,4 @@
+// prettier-ignore
 export const theme = {
   red: '#ff0000',
   blue: '#0000ff',
@@ -10,4 +11,4 @@ export const theme = {
     secondary: '#3f8cf3',
     black: '#333333'
   }
-};
+}
