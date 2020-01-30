@@ -1,13 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ChatMessages = ({ messages, bottomRef }) => {
+const ChatMessages = ({ messages, bottomRef, user }) => {
   return (
     <List>
       {messages &&
         messages.map(message => (
           <Message key={message._id}>
-            <ScreenName>{message.screenName}</ScreenName>: {message.text}
+            {message.screenName === user.screenName ? (
+              <MyScreenName>{message.screenName}</MyScreenName>
+            ) : (
+              <ScreenName>{message.screenName}</ScreenName>
+            )}
+            : {message.text}
           </Message>
         ))}
       <div ref={bottomRef}></div>
@@ -26,8 +31,12 @@ const List = styled.div`
   box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
 `;
 
+const MyScreenName = styled.span`
+  color: ${props => props.theme.red};
+`;
+
 const ScreenName = styled.span`
-  color: blue;
+  color: ${props => props.theme.blue};
 `;
 
 const Message = styled.div`

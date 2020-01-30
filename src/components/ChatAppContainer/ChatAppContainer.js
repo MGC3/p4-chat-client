@@ -49,7 +49,7 @@ export default ChatAppContainer;
 const Container = styled.div`
   width: 264px;
   height: 550px;
-  border: solid ${props => props.theme.blue};
+  border: solid ${props => props.theme.XPblue};
   background: ${props => props.theme.grey};
 `;
 

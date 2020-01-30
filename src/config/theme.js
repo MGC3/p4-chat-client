@@ -1,5 +1,7 @@
 export const theme = {
-  blue: '#265bee',
+  red: '#ff0000',
+  blue: '#0000ff',
+  XPblue: '#265bee',
   grey: '#ece9d7',
   white: '#ffffff',
   black: '#000000',

@@ -93,7 +93,7 @@ export default function ChatContainer({
           <TitleText>Instant Messenger | {chatRoomName}</TitleText>
           <CloseIcon onClick={() => handleClose()}>X</CloseIcon>
         </TitleBarContainer>
-        <ChatMessages messages={messages} bottomRef={bottomRef} />
+        <ChatMessages messages={messages} bottomRef={bottomRef} user={user} />
         <ChatForm
           handleKeyPress={handleKeyPress}
           inputRef={inputRef}
@@ -107,7 +107,7 @@ export default function ChatContainer({
 const Container = styled.div`
   width: 500px;
   height: 450px;
-  border: solid ${props => props.theme.blue};
+  border: solid ${props => props.theme.XPblue};
   background: ${props => props.theme.grey};
   position: absolute;
 `;
