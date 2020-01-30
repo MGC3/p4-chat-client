@@ -1,12 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert';
 import DesktopContainer from '../DesktopContainer/DesktopContainer';
 import ChatContainer from '../ChatContainer/ChatContainer';
-import SignIn from '../SignIn/SignIn';
-import SignUp from '../SignUp/SignUp';
-import SignOut from '../SignOut/SignOut';
+import { SignIn, SignOut, SignUp } from '../Auth/';
 import TaskBar from '../TaskBar/TaskBar';
 import ChatAppContainer from '../ChatAppContainer/ChatAppContainer';
 import ChatRoomList from '../ChatAppContainer/ChatRoomList';
