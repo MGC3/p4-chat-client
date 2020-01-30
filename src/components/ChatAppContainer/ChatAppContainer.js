@@ -5,11 +5,7 @@ import { Link } from 'react-router-dom';
 
 const ChatAppContainer = ({ children, user }) => {
   return (
-    <Draggable
-      bounds="parent"
-      handle=".chat-app-drag"
-      defaultPosition={{ x: 850, y: 60 }}
-    >
+    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 850, y: 60 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>
