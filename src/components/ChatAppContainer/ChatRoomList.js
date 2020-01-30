@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getChatRooms, deleteChatRoom } from '../../api/chatrooms';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 const buddies = ['DudeBroChill', 'Bro', 'test', 'Hi', 'Hello', 'test'];
 
@@ -64,11 +66,15 @@ const ChatRoomList = ({
             </RoomName>{' '}
             {user._id === chatRoom.owner && (
               <ButtonGroup>
-                <span onClick={() => handleDelete(chatRoom._id)}>- Delete</span>
-
-                <span onClick={() => handleClickUpdate(chatRoom._id)}>
-                  Update
-                </span>
+                <AiOutlineEdit
+                  color="blue"
+                  style={{ marginRight: '10' }}
+                  onClick={() => handleClickUpdate(chatRoom._id)}
+                />
+                <FaRegTrashAlt
+                  color="red"
+                  onClick={() => handleDelete(chatRoom._id)}
+                />
               </ButtonGroup>
             )}
           </Room>
@@ -98,7 +104,7 @@ const Room = styled.div`
 
 const RoomName = styled.div`
   cursor: pointer;
-  max-width: 100px;
+  max-width: 150px;
   overflow-wrap: break-word;
 `;
 
