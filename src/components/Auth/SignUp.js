@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { signUp, signIn } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
@@ -14,7 +14,6 @@ class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
-      passwordConfirmation: '',
       screenName: ''
     };
   }
@@ -86,17 +85,6 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Form.Group controlId="passwordConfirmation">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control
-                required
-                name="passwordConfirmation"
-                value={passwordConfirmation}
-                type="password"
-                placeholder="Confirm Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
             <Form.Group controlId="screenName">
               <Form.Label>Screen Name</Form.Label>
               <Form.Control
@@ -108,6 +96,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
+            <Link to="/-up">Go Back</Link>
             <Button variant="primary" type="submit">
               Submit
             </Button>
