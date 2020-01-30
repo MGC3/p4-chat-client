@@ -20,9 +20,10 @@ export default ChatMessages;
 const List = styled.div`
   overflow: scroll;
   height: 250px;
-  border: dashed;
   padding: 8px;
   margin: 8px;
+  background: ${props => props.theme.white};
+  box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
 `;
 
 const ScreenName = styled.span`

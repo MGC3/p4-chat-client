@@ -13,8 +13,8 @@ const ChatForm = ({ handleKeyPress, handleClick, inputRef }) => {
 export default ChatForm;
 
 const Input = styled.textarea`
-  background: papayawhip;
-  border: dashed;
+  background: ${props => props.theme.white};
+  box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
   padding: 8px;
   margin: 8px;
   /* TODO: shouldn't hard code this, but good enough for now */

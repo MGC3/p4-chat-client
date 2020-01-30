@@ -85,7 +85,8 @@ export default ChatRoomList;
 const List = styled.div`
   overflow: scroll;
   height: 280px;
-  border: dashed;
+  background: ${props => props.theme.white};
+  box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
   padding: 8px;
   margin: 8px;
 `;

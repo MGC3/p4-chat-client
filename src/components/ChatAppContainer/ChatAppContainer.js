@@ -11,12 +11,13 @@ const ChatAppContainer = ({ children, user }) => {
           <Icon>X</Icon>
           <TitleText>Instant Messenger</TitleText>
           {user && user.token ? (
-            <CloseIcon>
-              {' '}
-              <Link to="/sign-out">X </Link>
-            </CloseIcon>
+            <StyledLink to="/sign-out">
+              <CloseIcon>X</CloseIcon>
+            </StyledLink>
           ) : (
-            <CloseIcon>X</CloseIcon>
+            <StyledLink to="/">
+              <CloseIcon>X</CloseIcon>
+            </StyledLink>
           )}
         </TitleBarContainer>
         {children}
@@ -112,6 +113,10 @@ const IconGroup = styled.div`
   justify-content: space-between;
   position: fixed;
   bottom: 0;
+`;
+
+const StyledLink = styled(Link)`
+  margin-left: auto;
 `;
 
 const TestIcon = styled.div`
