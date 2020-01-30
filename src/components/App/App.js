@@ -6,6 +6,7 @@ import DesktopContainer from '../DesktopContainer/DesktopContainer';
 import ChatContainer from '../ChatContainer/ChatContainer';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
+import SignOut from '../SignOut/SignOut';
 import TaskBar from '../TaskBar/TaskBar';
 import ChatAppContainer from '../ChatAppContainer/ChatAppContainer';
 import ChatRoomList from '../ChatAppContainer/ChatRoomList';
@@ -57,7 +58,7 @@ const App = ({ socket }) => {
         path="/home"
         render={({ history }) => (
           <div>
-            <ChatAppContainer>
+            <ChatAppContainer user={user}>
               <ChatRoomList
                 user={user}
                 history={history}
@@ -97,7 +98,13 @@ const App = ({ socket }) => {
           </div>
         )}
       />
-
+      <AuthenticatedRoute
+        user={user}
+        path="/sign-out"
+        render={() => (
+          <SignOut alert={alert} clearUser={clearUser} user={user} />
+        )}
+      />
       <TaskBar />
     </DesktopContainer>
   );

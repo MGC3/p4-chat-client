@@ -1,15 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import Draggable from 'react-draggable';
+import { Link } from 'react-router-dom';
 
-const ChatAppContainer = ({ children }) => {
+const ChatAppContainer = ({ children, user }) => {
   return (
     <Draggable handle=".chat-app-drag" defaultPosition={{ x: 850, y: 0 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>
-          <TitleText>Sign On</TitleText>
-          <CloseIcon>X</CloseIcon>
+          <TitleText>Instant Messenger</TitleText>
+          {user && user.token ? (
+            <CloseIcon>
+              {' '}
+              <Link to="/sign-out">X </Link>
+            </CloseIcon>
+          ) : (
+            <CloseIcon>X</CloseIcon>
+          )}
         </TitleBarContainer>
         {children}
         <IconGroup>
