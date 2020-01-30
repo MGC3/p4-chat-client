@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 
 import { signOut } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
+import doorslam from '../../audio/doorslam.wav';
+let doorSlam = new Audio(doorslam);
 
 class SignOut extends Component {
   componentDidMount() {
@@ -17,7 +19,8 @@ class SignOut extends Component {
         })
       )
       .finally(() => history.push('/'))
-      .finally(() => clearUser());
+      .finally(() => clearUser())
+      .finally(() => doorSlam.play());
   }
 
   render() {

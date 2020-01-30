@@ -20,7 +20,7 @@ export default function ChatContainer({
   chatRoomId,
   setChatOpen,
   chatRoomName,
-  alerts
+  alert
 }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
