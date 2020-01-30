@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import { signIn } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -66,6 +65,7 @@ class SignIn extends Component {
                 placeholder="Enter email"
                 onChange={this.handleChange}
               />
+              <Link to="/sign-up">Get an account</Link>
             </Form.Group>
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>

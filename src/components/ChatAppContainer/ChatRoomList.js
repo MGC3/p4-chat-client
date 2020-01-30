@@ -10,7 +10,8 @@ const ChatRoomList = ({
   setChatRoomId,
   setChatOpen,
   chatOpen,
-  setChatRoomName
+  setChatRoomName,
+  history
 }) => {
   const [chatRooms, setChatRooms] = useState([]);
   useEffect(() => {
@@ -46,6 +47,10 @@ const ChatRoomList = ({
     }
   };
 
+  const handleClickUpdate = chatRoomId => {
+    history.push({ pathname: '/update-chatroom', state: { chatRoomId } });
+  };
+
   return (
     <List>
       <b>ChatRooms</b> <Link to="/create-chatroom">+ Create Room</Link>
@@ -60,10 +65,10 @@ const ChatRoomList = ({
             {user._id === chatRoom.owner && (
               <React.Fragment>
                 <span onClick={() => handleDelete(chatRoom._id)}>- Delete</span>
-                <Link to="/update-chatroom">
-                  {' '}
-                  <span>Update</span>
-                </Link>
+
+                <span onClick={() => handleClickUpdate(chatRoom._id)}>
+                  Update
+                </span>
               </React.Fragment>
             )}
           </Room>

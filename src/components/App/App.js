@@ -4,10 +4,11 @@ import { AuthenticatedRoute } from '../AuthenticatedRoute';
 import { AutoDismissAlert } from '../AutoDismissAlert';
 import { DesktopContainer } from '../DesktopContainer';
 import { ChatContainer } from '../ChatContainer';
-import { SignIn, SignOut, SignUp } from '../Auth';
+import { SignIn, SignOut, SignUp, ChangePassword } from '../Auth';
 import { TaskBar } from '../TaskBar';
 import { ChatAppContainer, ChatRoomList } from '../ChatAppContainer';
 import { CreateChatRoom } from '../CreateChatRoom';
+import { UpdateChatRoom } from '../UpdateChatRoom';
 
 const App = ({ socket }) => {
   const [user, setUser] = useState(null);
@@ -92,7 +93,16 @@ const App = ({ socket }) => {
         path="/update-chatroom"
         render={() => (
           <ChatAppContainer>
-            <CreateChatRoom user={user} alert={alert} clearUser={clearUser} />
+            <UpdateChatRoom user={user} alert={alert} clearUser={clearUser} />
+          </ChatAppContainer>
+        )}
+      />
+      <AuthenticatedRoute
+        user={user}
+        path="/change-password"
+        render={() => (
+          <ChatAppContainer>
+            <ChangePassword user={user} alert={alert} clearUser={clearUser} />
           </ChatAppContainer>
         )}
       />
