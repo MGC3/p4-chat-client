@@ -1,31 +1,31 @@
-import React from 'react'
-import Alert from 'react-bootstrap/Alert'
+import React from 'react';
+import Alert from 'react-bootstrap/Alert';
 
-import './AutoDismissAlert.scss'
+import './AutoDismissAlert.scss';
 
 class AutoDismissAlert extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       show: true
-    }
+    };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.timer = setInterval(() => {
-      this.setState({ show: false })
-    }, 5000)
+      this.setState({ show: false });
+    }, 1300);
   }
 
-  componentWillUnmount () {
-    clearInterval(this.timer)
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
-  handleClose = () => this.setState({ show: false })
+  handleClose = () => this.setState({ show: false });
 
-  render () {
-    const { variant, heading, message } = this.props
+  render() {
+    const { variant, heading, message } = this.props;
     return (
       <Alert
         dismissible
@@ -34,14 +34,12 @@ class AutoDismissAlert extends React.Component {
         onClose={this.handleClose}
       >
         <div className="container">
-          <Alert.Heading>
-            {heading}
-          </Alert.Heading>
+          <Alert.Heading>{heading}</Alert.Heading>
           <p className="alert-body">{message}</p>
         </div>
       </Alert>
-    )
+    );
   }
 }
 
-export default AutoDismissAlert
+export default AutoDismissAlert;

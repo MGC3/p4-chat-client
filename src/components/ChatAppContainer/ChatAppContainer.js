@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const ChatAppContainer = ({ children, user }) => {
   return (
-    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 850, y: 0 }}>
+    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 850, y: 60 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon>X</Icon>
@@ -48,13 +48,24 @@ export default ChatAppContainer;
 const Container = styled.div`
   width: 264px;
   height: 550px;
-  border: dashed;
+  border: solid ${props => props.theme.blue};
+  background: ${props => props.theme.grey};
 `;
 
+/* TODO: abstract to common/shared components */
 const TitleBarContainer = styled.div`
   width: 100%;
   height: 32px;
-  border: dashed;
+  /* gradient attribution to codepen: https://codepen.io/brundolf/pen/wzrWdy */
+  background: linear-gradient(
+      to bottom,
+      ${props => props.theme.gradientBlue.primary} 0%,
+      ${props => props.theme.gradientBlue.secondary} 9%,
+      ${props => props.theme.gradientBlue.primary} 18%,
+      ${props => props.theme.gradientBlue.primary} 92%,
+      ${props => props.theme.gradientBlue.black} 100%
+    )
+    center/cover no-repeat;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   display: flex;
@@ -72,7 +83,16 @@ const CloseIcon = styled.button`
   /* test styles delete */
   height: 100%;
   width: 32px;
-  color: black;
+  color: ${props => props.theme.white};
+  background: linear-gradient(
+      to bottom,
+      #df4b1d 0%,
+      #e67053 9%,
+      #df4b1d 18%,
+      #e67053 92%,
+      #333 100%
+    )
+    center/cover no-repeat;
 `;
 
 const Icon = styled.div`
