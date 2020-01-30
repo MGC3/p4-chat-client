@@ -23,10 +23,15 @@ const ChatRoomList = ({
   const onGetChatRooms = () => {
     getChatRooms(user)
       .then(res => {
-        console.warn(res.data);
         setChatRooms(res.data.chatrooms);
       })
-      .catch(console.error);
+      .catch(() => {
+        alert({
+          heading: 'Chatroom Failure',
+          message: 'Something went wrong trying to get chatrooms',
+          variant: 'danger'
+        });
+      });
   };
 
   const handleDelete = chatRoomId => {
@@ -34,7 +39,13 @@ const ChatRoomList = ({
       .then(() => {
         onGetChatRooms();
       })
-      .catch(console.error);
+      .catch(() => {
+        alert({
+          heading: 'Delete Failure',
+          message: 'Something went wrong trying to delete chatroom',
+          variant: 'danger'
+        });
+      });
   };
 
   const handleClickChatRoom = (chatRoomId, chatRoomName) => {

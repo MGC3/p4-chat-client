@@ -19,7 +19,8 @@ export default function ChatContainer({
   user,
   chatRoomId,
   setChatOpen,
-  chatRoomName
+  chatRoomName,
+  alerts
 }) {
   const [messages, setMessages] = useState([]);
   const inputRef = useRef(null);
@@ -61,7 +62,13 @@ export default function ChatContainer({
         setMessages(res.data.chatroom.messages);
         scrollToBottom();
       })
-      .catch(console.error);
+      .catch(() => {
+        alert({
+          heading: 'Failure getting messages',
+          message: 'Something went wrong trying to get messages',
+          variant: 'danger'
+        });
+      });
   };
 
   const handleClick = () => {
@@ -73,7 +80,13 @@ export default function ChatContainer({
         onGetMessages();
         imSend.play();
       })
-      .catch(() => console.warn('Error creating message'));
+      .catch(() => {
+        alert({
+          heading: 'Send Message Failure',
+          message: 'Something went wrong trying to send messages',
+          variant: 'danger'
+        });
+      });
     inputRef.current.value = '';
   };
 
@@ -89,7 +102,13 @@ export default function ChatContainer({
           onGetMessages();
           imSend.play();
         })
-        .catch(() => console.warn('Error creating message'));
+        .catch(() => {
+          alert({
+            heading: 'Send Message Failure',
+            message: 'Something went wrong trying to send messages',
+            variant: 'danger'
+          });
+        });
       inputRef.current.value = '';
     }
   };

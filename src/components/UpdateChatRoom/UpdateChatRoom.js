@@ -35,8 +35,7 @@ class UpdateChatRoom extends Component {
         })
       )
       .then(() => history.push('/home'))
-      .catch(error => {
-        console.error(error);
+      .catch(() => {
         this.setState({ name: '' });
         alert({
           heading: 'Update ChatRoom Failed',

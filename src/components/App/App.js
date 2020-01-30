@@ -59,6 +59,7 @@ const App = ({ socket }) => {
             <ChatAppContainer user={user}>
               <ChatRoomList
                 user={user}
+                alert={alert}
                 history={history}
                 chatOpen={chatOpen}
                 setChatOpen={setChatOpen}
@@ -69,10 +70,10 @@ const App = ({ socket }) => {
             {chatOpen && chatRoomId && (
               <ChatContainer
                 socket={socket}
+                alert={alert}
                 chatRoomId={chatRoomId}
                 setChatOpen={setChatOpen}
                 user={user}
-                clearUser={clearUser}
                 chatRoomName={chatRoomName}
               />
             )}
@@ -84,7 +85,7 @@ const App = ({ socket }) => {
         path="/create-chatroom"
         render={() => (
           <ChatAppContainer>
-            <CreateChatRoom user={user} alert={alert} clearUser={clearUser} />
+            <CreateChatRoom user={user} alert={alert} />
           </ChatAppContainer>
         )}
       />
@@ -93,7 +94,7 @@ const App = ({ socket }) => {
         path="/update-chatroom"
         render={() => (
           <ChatAppContainer>
-            <UpdateChatRoom user={user} alert={alert} clearUser={clearUser} />
+            <UpdateChatRoom user={user} alert={alert} />
           </ChatAppContainer>
         )}
       />
@@ -102,7 +103,7 @@ const App = ({ socket }) => {
         path="/change-password"
         render={() => (
           <ChatAppContainer>
-            <ChangePassword user={user} alert={alert} clearUser={clearUser} />
+            <ChangePassword user={user} alert={alert} />
           </ChatAppContainer>
         )}
       />
