@@ -85,17 +85,18 @@ const App = ({ socket }) => {
         user={user}
         path="/create-chatroom"
         render={() => (
-          <div>
-            <ChatAppContainer>
-              <CreateChatRoom user={user} alert={alert} clearUser={clearUser} />
-            </ChatAppContainer>
-            <ChatContainer
-              alert={alert}
-              socket={socket}
-              user={user}
-              clearUser={clearUser}
-            />
-          </div>
+          <ChatAppContainer>
+            <CreateChatRoom user={user} alert={alert} clearUser={clearUser} />
+          </ChatAppContainer>
+        )}
+      />
+      <AuthenticatedRoute
+        user={user}
+        path="/update-chatroom"
+        render={() => (
+          <ChatAppContainer>
+            <CreateChatRoom user={user} alert={alert} clearUser={clearUser} />
+          </ChatAppContainer>
         )}
       />
       <AuthenticatedRoute

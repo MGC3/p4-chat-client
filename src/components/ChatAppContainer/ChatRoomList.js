@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { getChatRooms, deleteChatRoom } from '../../api/chatrooms';
@@ -20,6 +20,7 @@ const ChatRoomList = ({
   const onGetChatRooms = () => {
     getChatRooms(user)
       .then(res => {
+        console.warn(res.data);
         setChatRooms(res.data.chatrooms);
       })
       .catch(console.error);
@@ -56,9 +57,15 @@ const ChatRoomList = ({
             >
               {chatRoom.name}
             </span>{' '}
-            <span onClick={() => handleDelete(chatRoom._id)}>
-              - Delete Room
-            </span>
+            {user._id === chatRoom.owner && (
+              <React.Fragment>
+                <span onClick={() => handleDelete(chatRoom._id)}>- Delete</span>
+                <Link to="/update-chatroom">
+                  {' '}
+                  <span>Update</span>
+                </Link>
+              </React.Fragment>
+            )}
           </Room>
         ))}
       <b>Buddies (6/6)</b>

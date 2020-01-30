@@ -36,6 +36,21 @@ export const getChatRooms = user => {
   });
 };
 
+export const updateChatRoom = (chatroom, chatRoomId, user) => {
+  return axios({
+    url: apiUrl + '/chatrooms/' + chatRoomId,
+    method: 'PATCH',
+    headers: {
+      Authorization: `Token token=${user.token}`
+    },
+    data: {
+      chatroom: {
+        name: chatroom.name
+      }
+    }
+  });
+};
+
 export const deleteChatRoom = (chatRoomId, user) => {
   return axios({
     url: apiUrl + '/chatrooms/' + chatRoomId,
