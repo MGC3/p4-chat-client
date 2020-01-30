@@ -107,7 +107,7 @@ const Icon = styled.div`
 `;
 
 const IconGroup = styled.div`
-  width: 264px;
+  width: 100%;
   height: 72px;
   border: dashed;
   display: flex;

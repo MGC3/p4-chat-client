@@ -5,6 +5,14 @@ import ChatMessages from './ChatMessages';
 import Draggable from 'react-draggable';
 import { createMessage } from '../../api/messages';
 import { getChatRoom } from '../../api/chatrooms';
+import imsend from '../../audio/imsend.wav';
+import imrcv from '../../audio/imrcv.wav';
+import dooropen from '../../audio/dooropen.wav';
+import doorslam from '../../audio/doorslam.wav';
+let imSend = new Audio(imsend);
+let imReceive = new Audio(imrcv);
+let doorOpen = new Audio(dooropen);
+let doorSlam = new Audio(doorslam);
 
 export default function ChatContainer({
   socket,
@@ -22,14 +30,15 @@ export default function ChatContainer({
     // get all messages, so I see the new messages
     socket.on('new chat message', () => {
       onGetMessages();
+      imReceive.play();
     });
 
     socket.on('join success', () => {
-      console.log('IO knows somebody joined a channel');
+      doorOpen.play();
     });
 
     socket.on('user left chatroom', () => {
-      console.log('IO knows somebody left this room');
+      doorSlam.play();
     });
 
     // when the page first loads, get all messages
@@ -61,6 +70,8 @@ export default function ChatContainer({
       // then tell socket.io about it
       .then(() => {
         socket.emit('send chat message', chatRoomName);
+        onGetMessages();
+        imSend.play();
       })
       .catch(() => console.warn('Error creating message'));
     inputRef.current.value = '';
@@ -75,6 +86,8 @@ export default function ChatContainer({
         // then tell socket.io about it
         .then(() => {
           socket.emit('send chat message', chatRoomName);
+          onGetMessages();
+          imSend.play();
         })
         .catch(() => console.warn('Error creating message'));
       inputRef.current.value = '';
@@ -106,7 +119,7 @@ export default function ChatContainer({
 
 const Container = styled.div`
   width: 500px;
-  height: 450px;
+  height: 482px;
   border: solid ${props => props.theme.XPblue};
   background: ${props => props.theme.grey};
   position: absolute;
