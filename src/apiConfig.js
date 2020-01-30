@@ -1,13 +1,13 @@
-let apiUrl
+let apiUrl;
 const apiUrls = {
-  production: 'https://aqueous-atoll-85096.herokuapp.com',
+  production: 'https://sleepy-earth-13397.herokuapp.com',
   development: 'http://localhost:4741'
-}
+};
 
 if (window.location.hostname === 'localhost') {
-  apiUrl = apiUrls.development
+  apiUrl = apiUrls.development;
 } else {
-  apiUrl = apiUrls.production
+  apiUrl = apiUrls.production;
 }
 
-export default apiUrl
+export default apiUrl;
