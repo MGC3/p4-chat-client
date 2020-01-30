@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { createChatRoom } from '../../api/chatrooms';
 import messages from '../AutoDismissAlert/messages';
@@ -64,6 +64,7 @@ class CreateChatRoom extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
+            <Link to="/home">Go Back</Link>
             <Button variant="primary" type="submit">
               Submit
             </Button>

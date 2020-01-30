@@ -96,7 +96,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Link to="/-up">Go Back</Link>
+            <Link to="/">Go Back</Link>
             <Button variant="primary" type="submit">
               Submit
             </Button>
