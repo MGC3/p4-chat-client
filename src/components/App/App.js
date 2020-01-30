@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
-import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute';
-import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert';
-import DesktopContainer from '../DesktopContainer/DesktopContainer';
-import ChatContainer from '../ChatContainer/ChatContainer';
-import { SignIn, SignOut, SignUp } from '../Auth/';
-import TaskBar from '../TaskBar/TaskBar';
-import ChatAppContainer from '../ChatAppContainer/ChatAppContainer';
-import ChatRoomList from '../ChatAppContainer/ChatRoomList';
-import CreateChatRoom from '../CreateChatRoom/CreateChatRoom';
+import { AuthenticatedRoute } from '../AuthenticatedRoute';
+import { AutoDismissAlert } from '../AutoDismissAlert';
+import { DesktopContainer } from '../DesktopContainer';
+import { ChatContainer } from '../ChatContainer';
+import { SignIn, SignOut, SignUp } from '../Auth';
+import { TaskBar } from '../TaskBar';
+import { ChatAppContainer, ChatRoomList } from '../ChatAppContainer';
+import { CreateChatRoom } from '../CreateChatRoom';
 
 const App = ({ socket }) => {
   const [user, setUser] = useState(null);
