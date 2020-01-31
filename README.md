@@ -42,7 +42,7 @@ There were also A LOT of silly ideas (that I still very much want to implement),
 Initial wireframe for MVP:
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/MGC3/p4-chat-client/master/documentation/wireframe.png" width=300>
+<img src="https://raw.githubusercontent.com/MGC3/p4-chat-client/master/documentation/wireframe.jpg" width=300>
 </p>
 
 Progress towards MVP:
