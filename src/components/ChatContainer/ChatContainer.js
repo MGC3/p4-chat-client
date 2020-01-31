@@ -54,6 +54,8 @@ export default function ChatContainer({
       doorSlam.play();
     });
 
+    doorOpen.play();
+
     // when the page first loads, get all messages
     onGetMessages();
 
