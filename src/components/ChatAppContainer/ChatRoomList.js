@@ -67,6 +67,7 @@ const ChatRoomList = ({
   return (
     <List>
       <b>ChatRooms</b> <Link to="/create-chatroom">+ Create Room</Link>
+      <br />
       {chatRooms &&
         chatRooms.map(chatRoom => (
           <Room key={chatRoom._id}>

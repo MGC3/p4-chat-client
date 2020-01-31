@@ -65,7 +65,6 @@ class SignIn extends Component {
                 placeholder="Enter email"
                 onChange={this.handleChange}
               />
-              <Link to="/sign-up">Get an account</Link>
             </Form.Group>
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
@@ -82,6 +81,9 @@ class SignIn extends Component {
               Submit
             </Button>
           </Form>
+          {/* TODO: not this */}
+          <br />
+          <Link to="/sign-up">Get an account</Link>
         </div>
       </div>
     );
