@@ -12,4 +12,5 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-image: url(${bliss});
+  background-size: 100vw 100vh;
 `;
