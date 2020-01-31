@@ -23,6 +23,7 @@ export default function ChatContainer({
   alert
 }) {
   const [messages, setMessages] = useState([]);
+  const [numClients, setNumClients] = useState(0);
   const inputRef = useRef(null);
   const bottomRef = useRef(null);
 
@@ -37,6 +38,16 @@ export default function ChatContainer({
 
     socket.on('join success', () => {
       doorOpen.play();
+    });
+
+    socket.on('count', num => {
+      setNumClients(num);
+    });
+
+    // when users close the tab/browser window, they don't emit a 'leave chatroom' command, and so our room count will be off.
+    // to keep the room count accurate, request an updated count of users in the room when this event occurs.
+    socket.on('user force dc', () => {
+      socket.emit('request count', chatRoomName);
     });
 
     socket.on('user left chatroom', () => {
@@ -122,7 +133,12 @@ export default function ChatContainer({
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon></Icon>
-          <TitleText>Instant Messenger | {chatRoomName}</TitleText>
+          <TitleText>
+            {chatRoomName}:{' '}
+            {numClients > 1
+              ? `${numClients} users in this room`
+              : '1 user in this room'}
+          </TitleText>
           <CloseIcon onClick={() => handleClose()}>X</CloseIcon>
         </TitleBarContainer>
         <ChatMessages messages={messages} bottomRef={bottomRef} user={user} />
