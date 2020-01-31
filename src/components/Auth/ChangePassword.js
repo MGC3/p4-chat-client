@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { changePassword } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
@@ -77,6 +77,7 @@ class ChangePassword extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
+            <Link to="/home">Go Back</Link>
             <Button variant="primary" type="submit">
               Submit
             </Button>

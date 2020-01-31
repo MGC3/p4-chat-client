@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Draggable from 'react-draggable';
 import { Link } from 'react-router-dom';
+import IconGroup from './IconGroup';
 
 const ChatAppContainer = ({ children, user }) => {
   return (
@@ -21,24 +22,7 @@ const ChatAppContainer = ({ children, user }) => {
           )}
         </TitleBarContainer>
         {children}
-        <IconGroup>
-          <TestIcon>
-            <TestImage />
-            <TestText></TestText>
-          </TestIcon>
-          <TestIcon>
-            <TestImage />
-            <TestText></TestText>
-          </TestIcon>
-          <TestIcon>
-            <TestImage />
-            <TestText></TestText>
-          </TestIcon>
-          <TestIcon>
-            <TestImage />
-            <TestText></TestText>
-          </TestIcon>
-        </IconGroup>
+        <IconGroup user={user} />
       </Container>
     </Draggable>
   );
@@ -104,37 +88,6 @@ const Icon = styled.div`
   margin-right: 32px;
 `;
 
-const IconGroup = styled.div`
-  width: 100%;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  bottom: 0;
-`;
-
 const StyledLink = styled(Link)`
   margin-left: auto;
-`;
-
-const TestIcon = styled.div`
-  width: 72px;
-  height: 72px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-
-const TestImage = styled.div`
-  width: 40px;
-  height: 40px;
-  margin: 0;
-`;
-
-const TestText = styled.p`
-  color: black;
-  margin: 0;
-  padding: 0;
 `;

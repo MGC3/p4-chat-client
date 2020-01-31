@@ -5,12 +5,12 @@ const ChatForm = ({ handleKeyPress, handleClick, inputRef }) => {
   return (
     <Fragment>
       <Input onKeyPress={e => handleKeyPress(e)} ref={inputRef} type="text" />
-      <IconGroup>
+      <IconGroupChatRoom>
         <TestIcon onClick={handleClick}>
           {/* <TestImage /> */}
           <TestText>Send</TestText>
         </TestIcon>
-      </IconGroup>
+      </IconGroupChatRoom>
     </Fragment>
   );
 };
@@ -26,7 +26,7 @@ const Input = styled.textarea`
   width: 478px;
 `;
 
-const IconGroup = styled.div`
+const IconGroupChatRoom = styled.div`
   width: 100%;
   height: 72px;
   display: flex;
