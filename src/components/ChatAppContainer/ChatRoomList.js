@@ -13,7 +13,8 @@ const ChatRoomList = ({
   setChatOpen,
   chatOpen,
   setChatRoomName,
-  history
+  history,
+  alert
 }) => {
   const [chatRooms, setChatRooms] = useState([]);
   useEffect(() => {
@@ -51,7 +52,11 @@ const ChatRoomList = ({
   const handleClickChatRoom = (chatRoomId, chatRoomName) => {
     // if a current chat window is open, close it
     if (chatOpen) {
-      setChatOpen(false);
+      alert({
+        heading: 'Chatroom still open',
+        message: 'Close out of the chatroom and try again',
+        variant: 'info'
+      });
     } else {
       // else let the chat window component mount
       setChatRoomId(chatRoomId);
