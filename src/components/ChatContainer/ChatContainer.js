@@ -121,7 +121,7 @@ export default function ChatContainer({
     <Draggable handle=".chat-app-drag" defaultPosition={{ x: 250, y: -480 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
-          <Icon>X</Icon>
+          <Icon></Icon>
           <TitleText>Instant Messenger | {chatRoomName}</TitleText>
           <CloseIcon onClick={() => handleClose()}>X</CloseIcon>
         </TitleBarContainer>
@@ -173,8 +173,6 @@ const TitleText = styled.p`
 `;
 
 const Icon = styled.div`
-  /* test styles delete */
-  border: dashed pink;
   height: 100%;
   width: 32px;
   margin-right: 32px;
@@ -182,7 +180,6 @@ const Icon = styled.div`
 
 const CloseIcon = styled.button`
   margin-left: auto;
-  /* test styles delete */
   height: 100%;
   width: 32px;
   color: ${props => props.theme.white};

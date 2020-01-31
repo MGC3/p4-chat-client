@@ -5,7 +5,7 @@ const TaskBar = () => {
   return (
     <Container>
       <StartButton>Start</StartButton>
-      <Time>CLOCK</Time>
+      <Time></Time>
     </Container>
   );
 };
@@ -30,9 +30,9 @@ const Container = styled.div`
 
 const StartButton = styled.button`
   width: 100px;
-  border: none;
   height: 48px;
-  color: ${props => props.theme.gradientBlue.white};
+  border: none;
+  color: ${props => props.theme.white};
   font-size: 20px;
   background: linear-gradient(
       to bottom,
@@ -48,6 +48,5 @@ const StartButton = styled.button`
 const Time = styled.div`
   margin-left: auto;
   color: black;
-  border: dashed red;
   width: 100px;
 `;

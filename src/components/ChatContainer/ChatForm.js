@@ -7,7 +7,7 @@ const ChatForm = ({ handleKeyPress, handleClick, inputRef }) => {
       <Input onKeyPress={e => handleKeyPress(e)} ref={inputRef} type="text" />
       <IconGroup>
         <TestIcon onClick={handleClick}>
-          <TestImage />
+          {/* <TestImage /> */}
           <TestText>Send</TestText>
         </TestIcon>
       </IconGroup>
@@ -42,7 +42,8 @@ const IconGroup = styled.div`
 const TestIcon = styled.div`
   width: 72px;
   height: 72px;
-  border: dashed;
+  background: #d3d0be;
+  border: solid 1px gray;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,11 +53,10 @@ const TestIcon = styled.div`
   cursor: pointer;
 `;
 
-const TestImage = styled.img`
+const TestImage = styled.div`
   width: 40px;
   height: 40px;
   margin: 0;
-  border: dashed red;
 `;
 
 const TestText = styled.p`

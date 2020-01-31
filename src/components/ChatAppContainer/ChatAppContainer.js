@@ -8,7 +8,7 @@ const ChatAppContainer = ({ children, user }) => {
     <Draggable handle=".chat-app-drag" defaultPosition={{ x: 850, y: 60 }}>
       <Container>
         <TitleBarContainer className="chat-app-drag">
-          <Icon>X</Icon>
+          <Icon></Icon>
           <TitleText>Instant Messenger</TitleText>
           {user && user.token ? (
             <StyledLink to="/sign-out">
@@ -24,19 +24,19 @@ const ChatAppContainer = ({ children, user }) => {
         <IconGroup>
           <TestIcon>
             <TestImage />
-            <TestText>Setup</TestText>
+            <TestText></TestText>
           </TestIcon>
           <TestIcon>
             <TestImage />
-            <TestText>Setup</TestText>
+            <TestText></TestText>
           </TestIcon>
           <TestIcon>
             <TestImage />
-            <TestText>Setup</TestText>
+            <TestText></TestText>
           </TestIcon>
           <TestIcon>
             <TestImage />
-            <TestText>Setup</TestText>
+            <TestText></TestText>
           </TestIcon>
         </IconGroup>
       </Container>
@@ -99,8 +99,6 @@ const CloseIcon = styled.button`
 `;
 
 const Icon = styled.div`
-  /* test styles delete */
-  border: dashed pink;
   height: 100%;
   width: 32px;
   margin-right: 32px;
@@ -109,7 +107,6 @@ const Icon = styled.div`
 const IconGroup = styled.div`
   width: 100%;
   height: 72px;
-  border: dashed;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -124,18 +121,16 @@ const StyledLink = styled(Link)`
 const TestIcon = styled.div`
   width: 72px;
   height: 72px;
-  border: dashed;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 
-const TestImage = styled.img`
+const TestImage = styled.div`
   width: 40px;
   height: 40px;
   margin: 0;
-  border: dashed red;
 `;
 
 const TestText = styled.p`
