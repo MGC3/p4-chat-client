@@ -131,7 +131,11 @@ export default function ChatContainer({
   };
 
   return (
-    <Draggable handle=".chat-app-drag" defaultPosition={{ x: 250, y: -480 }}>
+    <Draggable
+      bounds="parent"
+      handle=".chat-app-drag"
+      defaultPosition={{ x: 250, y: 60 }}
+    >
       <Container>
         <TitleBarContainer className="chat-app-drag">
           <Icon></Icon>

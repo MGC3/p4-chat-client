@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Route } from 'react-router-dom';
 import { AuthenticatedRoute } from '../AuthenticatedRoute';
 import { AutoDismissAlert, AlertContainer } from '../AutoDismissAlert';
@@ -57,7 +57,7 @@ const App = ({ socket }) => {
         user={user}
         path="/home"
         render={({ history }) => (
-          <div>
+          <Fragment>
             <ChatAppContainer user={user}>
               <ChatRoomList
                 user={user}
@@ -79,7 +79,7 @@ const App = ({ socket }) => {
                 chatRoomName={chatRoomName}
               />
             )}
-          </div>
+          </Fragment>
         )}
       />
       <AuthenticatedRoute
