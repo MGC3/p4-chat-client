@@ -23,6 +23,7 @@ const Input = styled.textarea`
   box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
   padding: 8px;
   margin: 8px;
+  font-family: 'Times', serif;
   /* TODO: shouldn't hard code this, but good enough for now */
   width: 478px;
 `;
@@ -43,7 +44,7 @@ const IconGroupChatRoom = styled.div`
 const TestIcon = styled.div`
   width: 72px;
   height: 72px;
-  border: 1px solid grey;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
