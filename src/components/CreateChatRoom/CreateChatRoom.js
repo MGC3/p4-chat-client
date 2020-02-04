@@ -1,32 +1,24 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { createChatRoom } from '../../api/chatrooms';
 import messages from '../AutoDismissAlert/messages';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-class CreateChatRoom extends Component {
-  constructor() {
-    super();
+const CreateChatRoom = ({ alert, history, user }) => {
+  const [formData, setFormData] = useState({ name: '' });
 
-    this.state = {
-      name: ''
-    };
-  }
-
-  handleChange = event =>
-    this.setState({
+  const handleChange = event =>
+    setFormData({
       [event.target.name]: event.target.value
     });
 
-  onCreateChatRoom = event => {
+  const onCreateChatRoom = event => {
     event.preventDefault();
 
-    const { alert, history, user } = this.props;
-
-    createChatRoom(this.state, user)
+    createChatRoom(formData, user)
       .then(() =>
         alert({
           heading: 'Create ChatRoom Success',
@@ -36,7 +28,7 @@ class CreateChatRoom extends Component {
       )
       .then(() => history.push('/home'))
       .catch(() => {
-        this.setState({ name: '' });
+        setFormData({ name: '' });
         alert({
           heading: 'Create ChatRoom Failed',
           message: messages.createChatRoomFailure,
@@ -45,34 +37,33 @@ class CreateChatRoom extends Component {
       });
   };
 
-  render() {
-    const { name } = this.state;
-
-    return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Create ChatRoom</h3>
-          <Form onSubmit={this.onCreateChatRoom}>
-            <Form.Group controlId="name">
-              <Form.Label>ChatRoom name</Form.Label>
-              <Form.Control
-                required
-                name="name"
-                value={name}
-                type="text"
-                placeholder="ChatRoom name"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Link to="/home">Go Back</Link>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <Container>
+      <h3>Create ChatRoom</h3>
+      <Form onSubmit={onCreateChatRoom}>
+        <Form.Group controlId="name">
+          <Form.Label>ChatRoom name</Form.Label>
+          <Form.Control
+            required
+            name="name"
+            value={formData.name}
+            type="text"
+            placeholder="ChatRoom name"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      <Link to="/home">Go Back</Link>
+    </Container>
+  );
+};
 
 export default withRouter(CreateChatRoom);
+
+const Container = styled.div`
+  padding: 8px;
+  margin: 8px;
+`;
