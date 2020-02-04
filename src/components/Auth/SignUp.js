@@ -1,35 +1,30 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { signUp, signIn } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-class SignUp extends Component {
-  constructor() {
-    super();
+const SignUp = ({ alert, history, setUser }) => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    screenName: ''
+  });
 
-    this.state = {
-      email: '',
-      password: '',
-      screenName: ''
-    };
-  }
-
-  handleChange = event =>
-    this.setState({
+  const handleChange = event =>
+    setFormData({
+      ...formData,
       [event.target.name]: event.target.value
     });
 
-  onSignUp = event => {
+  const onSignUp = event => {
     event.preventDefault();
 
-    const { alert, history, setUser } = this.props;
-
-    signUp(this.state)
-      .then(() => signIn(this.state))
+    signUp(formData)
+      .then(() => signIn(formData))
       .then(res => setUser(res.data.user))
       .then(() =>
         alert({
@@ -41,7 +36,7 @@ class SignUp extends Component {
       .then(() => history.push('/'))
       .catch(error => {
         console.error(error);
-        this.setState({
+        setFormData({
           email: '',
           password: '',
           passwordConfirmation: '',
@@ -55,56 +50,55 @@ class SignUp extends Component {
       });
   };
 
-  render() {
-    const { email, password, screenName } = this.state;
-
-    return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Sign Up</h3>
-          <Form onSubmit={this.onSignUp}>
-            <Form.Group controlId="email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                required
-                type="email"
-                name="email"
-                value={email}
-                placeholder="Enter email"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                name="password"
-                value={password}
-                type="password"
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="screenName">
-              <Form.Label>Screen Name</Form.Label>
-              <Form.Control
-                required
-                name="screenName"
-                value={screenName}
-                type="text"
-                placeholder="Screen Name"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Link to="/">Go Back</Link>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <Container>
+      <h3>Sign Up</h3>
+      <Form onSubmit={onSignUp}>
+        <Form.Group controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            required
+            type="email"
+            name="email"
+            value={formData.email}
+            placeholder="Enter email"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            required
+            name="password"
+            value={formData.password}
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="screenName">
+          <Form.Label>Screen Name</Form.Label>
+          <Form.Control
+            required
+            name="screenName"
+            value={formData.screenName}
+            type="text"
+            placeholder="Screen Name"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      <Link to="/">Go Back</Link>
+    </Container>
+  );
+};
 
 export default withRouter(SignUp);
+
+const Container = styled.div`
+  padding: 8px;
+  margin: 8px;
+`;
