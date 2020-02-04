@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,27 +8,19 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import logo from '../../images/logo-splash.png';
 
-class SignIn extends Component {
-  constructor() {
-    super();
+const SignIn = ({ alert, history, setUser }) => {
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
-    this.state = {
-      email: '',
-      password: ''
-    };
-  }
-
-  handleChange = event =>
-    this.setState({
+  const handleChange = event =>
+    setFormData({
+      ...formData,
       [event.target.name]: event.target.value
     });
 
-  onSignIn = event => {
+  const onSignIn = event => {
     event.preventDefault();
 
-    const { alert, history, setUser } = this.props;
-
-    signIn(this.state)
+    signIn(formData)
       .then(res => setUser(res.data.user))
       .then(() =>
         alert({
@@ -39,7 +31,7 @@ class SignIn extends Component {
       )
       .then(() => history.push('/home'))
       .catch(() => {
-        this.setState({ email: '', password: '' });
+        setFormData({ email: '', password: '' });
         alert({
           heading: 'Sign In Failed',
           message: messages.signInFailure,
@@ -48,48 +40,44 @@ class SignIn extends Component {
       });
   };
 
-  render() {
-    const { email, password } = this.state;
-
-    return (
-      <Container>
-        <Image></Image>
-        <Form onSubmit={this.onSignIn}>
-          <Form.Group controlId="email">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              required
-              type="email"
-              name="email"
-              value={email}
-              placeholder="Enter email"
-              onChange={this.handleChange}
-              tabIndex="1"
-            />
-            <Link tabIndex="4" to="/sign-up">
-              Get an account
-            </Link>
-          </Form.Group>
-          <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              name="password"
-              value={password}
-              type="password"
-              placeholder="Password"
-              onChange={this.handleChange}
-              tabIndex="2"
-            />
-          </Form.Group>
-          <Button tabIndex="3" variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container>
+      <Image />
+      <Form onSubmit={onSignIn}>
+        <Form.Group controlId="email">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            required
+            type="email"
+            name="email"
+            value={formData.email}
+            placeholder="Enter email"
+            onChange={handleChange}
+            tabIndex="1"
+          />
+          <Link tabIndex="4" to="/sign-up">
+            Get an account
+          </Link>
+        </Form.Group>
+        <Form.Group controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            required
+            name="password"
+            value={formData.password}
+            type="password"
+            placeholder="Password"
+            onChange={handleChange}
+            tabIndex="2"
+          />
+        </Form.Group>
+        <Button tabIndex="3" variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </Container>
+  );
+};
 
 export default withRouter(SignIn);
 
