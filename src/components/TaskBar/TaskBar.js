@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import Clock from './Clock';
 
-const TaskBar = () => {
+const TaskBar = ({ toggleStart }) => {
   return (
     <Container>
-      <StartButton>Start</StartButton>
+      <StartButton onClick={toggleStart}>Start</StartButton>
       <Clock></Clock>
     </Container>
   );

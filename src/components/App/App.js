@@ -5,6 +5,7 @@ import { AutoDismissAlert, AlertContainer } from '../AutoDismissAlert';
 import { DesktopContainer } from '../DesktopContainer';
 import { ChatContainer } from '../ChatContainer';
 import { SignIn, SignOut, SignUp, ChangePassword } from '../Auth';
+import { StartMenu } from '../StartMenu';
 import { TaskBar } from '../TaskBar';
 import { ChatAppContainer, ChatRoomList } from '../ChatAppContainer';
 import { CreateChatRoom } from '../CreateChatRoom';
@@ -14,8 +15,13 @@ const App = ({ socket }) => {
   const [user, setUser] = useState(null);
   const [alerts, setAlerts] = useState([]);
   const [chatOpen, setChatOpen] = useState(false);
+  const [startMenuOpen, setStartMenuOpen] = useState(false);
   const [chatRoomId, setChatRoomId] = useState(null);
   const [chatRoomName, setChatRoomName] = useState('');
+
+  const toggleStart = () => {
+    startMenuOpen ? setStartMenuOpen(false) : setStartMenuOpen(true);
+  };
 
   const clearUser = () => setUser(null);
 
@@ -116,7 +122,8 @@ const App = ({ socket }) => {
           <SignOut alert={alert} clearUser={clearUser} user={user} />
         )}
       />
-      <TaskBar />
+      {startMenuOpen && <StartMenu />}
+      <TaskBar toggleStart={toggleStart} />
     </DesktopContainer>
   );
 };
