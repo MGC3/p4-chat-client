@@ -25,7 +25,7 @@ const ChatAppContainer = ({ children, user }) => {
             </StyledLink>
           )}
         </TitleBarContainer>
-        {children}
+        <Wrapper>{children}</Wrapper>
         <IconGroup user={user} />
       </Container>
     </Draggable>
@@ -39,6 +39,11 @@ const Container = styled.div`
   height: 550px;
   border: solid ${props => props.theme.XPblue};
   background: ${props => props.theme.grey};
+`;
+
+const Wrapper = styled.div`
+  padding: 8px;
+  margin: 8px;
 `;
 
 /* TODO: abstract to common/shared components */

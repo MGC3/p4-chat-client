@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { signUp, signIn } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
@@ -51,7 +50,7 @@ const SignUp = ({ alert, history, setUser }) => {
   };
 
   return (
-    <Container>
+    <Fragment>
       <h3>Sign Up</h3>
       <Form onSubmit={onSignUp}>
         <Form.Group controlId="email">
@@ -92,13 +91,8 @@ const SignUp = ({ alert, history, setUser }) => {
         </Button>
       </Form>
       <Link to="/">Go Back</Link>
-    </Container>
+    </Fragment>
   );
 };
 
 export default withRouter(SignUp);
-
-const Container = styled.div`
-  padding: 8px;
-  margin: 8px;
-`;

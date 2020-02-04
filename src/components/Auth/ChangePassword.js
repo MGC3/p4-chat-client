@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -42,7 +42,7 @@ const ChangePassword = ({ alert, history, user }) => {
   };
 
   return (
-    <Container>
+    <Fragment>
       <h3>Change Password</h3>
       <Form onSubmit={onChangePassword}>
         <Form.Group controlId="oldPassword">
@@ -72,13 +72,8 @@ const ChangePassword = ({ alert, history, user }) => {
         </Button>
       </Form>
       <Link to="/home">Go Back</Link>
-    </Container>
+    </Fragment>
   );
 };
 
 export default withRouter(ChangePassword);
-
-const Container = styled.div`
-  padding: 8px;
-  margin: 8px;
-`;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -41,7 +41,7 @@ const SignIn = ({ alert, history, setUser }) => {
   };
 
   return (
-    <Container>
+    <Fragment>
       <Image />
       <Form onSubmit={onSignIn}>
         <Form.Group controlId="email">
@@ -75,16 +75,11 @@ const SignIn = ({ alert, history, setUser }) => {
           Submit
         </Button>
       </Form>
-    </Container>
+    </Fragment>
   );
 };
 
 export default withRouter(SignIn);
-
-const Container = styled.div`
-  padding: 8px;
-  margin: 8px;
-`;
 
 const Image = styled.div`
   height: 200px;

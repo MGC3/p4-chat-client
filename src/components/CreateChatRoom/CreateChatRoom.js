@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { createChatRoom } from '../../api/chatrooms';
 import messages from '../AutoDismissAlert/messages';
@@ -38,7 +37,7 @@ const CreateChatRoom = ({ alert, history, user }) => {
   };
 
   return (
-    <Container>
+    <Fragment>
       <h3>Create ChatRoom</h3>
       <Form onSubmit={onCreateChatRoom}>
         <Form.Group controlId="name">
@@ -57,13 +56,8 @@ const CreateChatRoom = ({ alert, history, user }) => {
         </Button>
       </Form>
       <Link to="/home">Go Back</Link>
-    </Container>
+    </Fragment>
   );
 };
 
 export default withRouter(CreateChatRoom);
-
-const Container = styled.div`
-  padding: 8px;
-  margin: 8px;
-`;
