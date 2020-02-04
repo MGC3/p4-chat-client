@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import send from '../../images/aol-green.png';
 
 const ChatForm = ({ handleKeyPress, handleClick, inputRef }) => {
   return (
@@ -7,7 +8,7 @@ const ChatForm = ({ handleKeyPress, handleClick, inputRef }) => {
       <Input onKeyPress={e => handleKeyPress(e)} ref={inputRef} type="text" />
       <IconGroupChatRoom>
         <TestIcon onClick={handleClick}>
-          {/* <TestImage /> */}
+          <TestImage />
           <TestText>Send</TestText>
         </TestIcon>
       </IconGroupChatRoom>
@@ -42,8 +43,7 @@ const IconGroupChatRoom = styled.div`
 const TestIcon = styled.div`
   width: 72px;
   height: 72px;
-  background: #d3d0be;
-  border: solid 1px gray;
+  border: 1px solid grey;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,10 +57,13 @@ const TestImage = styled.div`
   width: 40px;
   height: 40px;
   margin: 0;
+  background-size: cover;
+  background-image: url(${send});
 `;
 
 const TestText = styled.p`
   color: black;
+  font-weight: 700;
   margin: 0;
   padding: 0;
 `;

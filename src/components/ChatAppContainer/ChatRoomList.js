@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { getChatRooms, deleteChatRoom } from '../../api/chatrooms';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import bg from '../../images/bg.png';
 
 const buddies = ['DudeBroChill', 'Bro', 'test', 'Hi', 'Hello', 'test'];
 
@@ -109,6 +110,8 @@ const List = styled.div`
   overflow: scroll;
   height: 280px;
   background: ${props => props.theme.white};
+  background-size: cover;
+  background-image: url(${bg});
   box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
   padding: 8px;
   margin: 8px;
