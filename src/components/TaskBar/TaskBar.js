@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Clock from './Clock';
+
 const TaskBar = () => {
   return (
     <Container>
       <StartButton>Start</StartButton>
-      <Time></Time>
+      <Clock></Clock>
     </Container>
   );
 };
@@ -43,10 +45,4 @@ const StartButton = styled.button`
       #333 100%
     )
     center/cover no-repeat;
-`;
-
-const Time = styled.div`
-  margin-left: auto;
-  color: black;
-  width: 100px;
 `;
