@@ -114,7 +114,6 @@ const List = styled.div`
   background-image: url(${bg});
   box-shadow: inset 1px 1px 2px 1px rgba(0, 0, 0, 0.45);
   padding: 8px;
-  margin: 8px;
 `;
 
 const Room = styled.div`

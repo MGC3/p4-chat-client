@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { signOut } from '../../api/auth';
@@ -6,10 +6,8 @@ import messages from '../AutoDismissAlert/messages';
 import doorslam from '../../audio/doorslam.wav';
 let doorSlam = new Audio(doorslam);
 
-class SignOut extends Component {
-  componentDidMount() {
-    const { alert, history, clearUser, user } = this.props;
-
+const SignOut = ({ alert, history, clearUser, user }) => {
+  useEffect(() => {
     signOut(user)
       .finally(() =>
         alert({
@@ -21,11 +19,9 @@ class SignOut extends Component {
       .finally(() => history.push('/'))
       .finally(() => clearUser())
       .finally(() => doorSlam.play());
-  }
+  }, []);
 
-  render() {
-    return '';
-  }
-}
+  return '';
+};
 
 export default withRouter(SignOut);

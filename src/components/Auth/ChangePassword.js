@@ -1,6 +1,5 @@
 import React, { useState, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import styled from 'styled-components';
 
 import { changePassword } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
