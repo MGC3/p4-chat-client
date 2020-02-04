@@ -1,33 +1,28 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { changePassword } from '../../api/auth';
 import messages from '../AutoDismissAlert/messages';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-class ChangePassword extends Component {
-  constructor() {
-    super();
+const ChangePassword = ({ alert, history, user }) => {
+  const [formData, setFormData] = useState({
+    oldPassword: '',
+    newPassword: ''
+  });
 
-    this.state = {
-      oldPassword: '',
-      newPassword: ''
-    };
-  }
-
-  handleChange = event =>
-    this.setState({
+  const handleChange = event =>
+    setFormData({
+      ...formData,
       [event.target.name]: event.target.value
     });
 
-  onChangePassword = event => {
+  const onChangePassword = event => {
     event.preventDefault();
 
-    const { alert, history, user } = this.props;
-
-    changePassword(this.state, user)
+    changePassword(formData, user)
       .then(() =>
         alert({
           heading: 'Change Password Success',
@@ -36,9 +31,8 @@ class ChangePassword extends Component {
         })
       )
       .then(() => history.push('/home'))
-      .catch(error => {
-        console.error(error);
-        this.setState({ oldPassword: '', newPassword: '' });
+      .catch(() => {
+        setFormData({ oldPassword: '', newPassword: '' });
         alert({
           heading: 'Change Password Failed',
           message: messages.changePasswordFailure,
@@ -47,45 +41,44 @@ class ChangePassword extends Component {
       });
   };
 
-  render() {
-    const { oldPassword, newPassword } = this.state;
-
-    return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Change Password</h3>
-          <Form onSubmit={this.onChangePassword}>
-            <Form.Group controlId="oldPassword">
-              <Form.Label>Old password</Form.Label>
-              <Form.Control
-                required
-                name="oldPassword"
-                value={oldPassword}
-                type="password"
-                placeholder="Old Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="newPassword">
-              <Form.Label>New Password</Form.Label>
-              <Form.Control
-                required
-                name="newPassword"
-                value={newPassword}
-                type="password"
-                placeholder="New Password"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Link to="/home">Go Back</Link>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <Container>
+      <h3>Change Password</h3>
+      <Form onSubmit={onChangePassword}>
+        <Form.Group controlId="oldPassword">
+          <Form.Label>Old password</Form.Label>
+          <Form.Control
+            required
+            name="oldPassword"
+            value={formData.oldPassword}
+            type="password"
+            placeholder="Old Password"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="newPassword">
+          <Form.Label>New Password</Form.Label>
+          <Form.Control
+            required
+            name="newPassword"
+            value={formData.newPassword}
+            type="password"
+            placeholder="New Password"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      <Link to="/home">Go Back</Link>
+    </Container>
+  );
+};
 
 export default withRouter(ChangePassword);
+
+const Container = styled.div`
+  padding: 8px;
+  margin: 8px;
+`;
