@@ -1,32 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import { updateChatRoom } from '../../api/chatrooms';
 import messages from '../AutoDismissAlert/messages';
-
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-class UpdateChatRoom extends Component {
-  constructor() {
-    super();
+const UpdateChatRoom = ({ alert, history, user, location }) => {
+  const [formData, setFormData] = useState({ name: '' });
 
-    this.state = {
-      name: ''
-    };
-  }
-
-  handleChange = event =>
-    this.setState({
+  const handleChange = event =>
+    setFormData({
       [event.target.name]: event.target.value
     });
 
-  onUpdateChatRoom = event => {
+  const onUpdateChatRoom = event => {
     event.preventDefault();
 
-    const { alert, history, user, location } = this.props;
-
-    updateChatRoom(this.state, location.state.chatRoomId, user)
+    updateChatRoom(formData, location.state.chatRoomId, user)
       .then(() =>
         alert({
           heading: 'Update ChatRoom Success',
@@ -36,7 +27,7 @@ class UpdateChatRoom extends Component {
       )
       .then(() => history.push('/home'))
       .catch(() => {
-        this.setState({ name: '' });
+        setFormData({ name: '' });
         alert({
           heading: 'Update ChatRoom Failed',
           message: messages.updateChatRoomFailure,
@@ -45,34 +36,28 @@ class UpdateChatRoom extends Component {
       });
   };
 
-  render() {
-    const { name } = this.state;
-
-    return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Update ChatRoom</h3>
-          <Form onSubmit={this.onUpdateChatRoom}>
-            <Form.Group controlId="name">
-              <Form.Label>ChatRoom name</Form.Label>
-              <Form.Control
-                required
-                name="name"
-                value={name}
-                type="text"
-                placeholder="ChatRoom name"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Link to="/home">Go Back</Link>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </div>
-      </div>
-    );
-  }
-}
+  return (
+    <Fragment>
+      <h3>Update ChatRoom</h3>
+      <Form onSubmit={onUpdateChatRoom}>
+        <Form.Group controlId="name">
+          <Form.Label>ChatRoom name</Form.Label>
+          <Form.Control
+            required
+            name="name"
+            value={formData.name}
+            type="text"
+            placeholder="ChatRoom name"
+            onChange={handleChange}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+      <Link to="/home">Go Back</Link>
+    </Fragment>
+  );
+};
 
 export default withRouter(UpdateChatRoom);
