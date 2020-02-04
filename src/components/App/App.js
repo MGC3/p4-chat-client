@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { AuthenticatedRoute } from '../AuthenticatedRoute';
-import { AutoDismissAlert } from '../AutoDismissAlert';
+import { AutoDismissAlert, AlertContainer } from '../AutoDismissAlert';
 import { DesktopContainer } from '../DesktopContainer';
 import { ChatContainer } from '../ChatContainer';
 import { SignIn, SignOut, SignUp, ChangePassword } from '../Auth';
@@ -25,14 +25,16 @@ const App = ({ socket }) => {
 
   return (
     <DesktopContainer>
-      {alerts.map((alert, index) => (
-        <AutoDismissAlert
-          key={index}
-          heading={alert.heading}
-          variant={alert.variant}
-          message={alert.message}
-        />
-      ))}
+      <AlertContainer>
+        {alerts.map((alert, index) => (
+          <AutoDismissAlert
+            key={index}
+            heading={alert.heading}
+            variant={alert.variant}
+            message={alert.message}
+          />
+        ))}
+      </AlertContainer>
       <Route
         exact
         path="/"
