@@ -4,13 +4,26 @@ import styled from 'styled-components';
 const StartMenu = () => {
   return (
     <Container>
-      <h1>Start Menu Component</h1>
+      <LeftPane>
+        <StyledLink href="https://michaelgchun.com" target="_blank">
+          <MenuItem>My Portfolio</MenuItem>
+        </StyledLink>
+        <StyledLink
+          href="https://www.michaelgchun.com/static/Michael-Chun-Resume-34e4d8014791f49dcf3438af60f066ec.pdf"
+          target="_blank"
+        >
+          <MenuItem>My Resume</MenuItem>
+        </StyledLink>
+      </LeftPane>
+      <RightPane />
     </Container>
   );
 };
 
 export default StartMenu;
 
+// some start menu styles borrowed from:
+// https://codepen.io/brundolf/full/wzrWdy
 const Container = styled.div`
   margin: auto 0 48px 0;
   display: flex;
@@ -18,6 +31,42 @@ const Container = styled.div`
   height: 500px;
   position: absolute;
   bottom: 0;
-  background: ${props => props.theme.white};
+  border: 1px solid ${props => props.theme.blue};
   border-radius: 0 8px 8px 0;
+`;
+
+const LeftPane = styled.div`
+  padding-top: 32px;
+  width: 50%;
+  background: ${props => props.theme.white};
+  border-right: 1px solid ${props => props.theme.blue};
+`;
+
+const RightPane = styled.div`
+  width: 50%;
+  background: ${props => props.theme.lightBlue};
+  border-radius: 0 8px 8px 0;
+`;
+
+const MenuItem = styled.div`
+  height: 48px;
+  width: 180px;
+  margin: 0 auto;
+  padding-right: 40px;
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background: #245edb;
+    cursor: pointer;
+    color: ${props => props.theme.white};
+  }
+`;
+
+const StyledLink = styled.a`
+  color: inherit;
 `;
