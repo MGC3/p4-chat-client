@@ -28,6 +28,7 @@ const Container = styled.div`
       ${props => props.theme.gradientBlue.black} 100%
     )
     center/cover no-repeat;
+  z-index: 300;
 `;
 
 const StartButton = styled.button`

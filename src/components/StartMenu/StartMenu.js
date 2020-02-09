@@ -33,6 +33,7 @@ const Container = styled.div`
   bottom: 0;
   border: 1px solid ${props => props.theme.blue};
   border-radius: 0 8px 8px 0;
+  z-index: 300;
 `;
 
 const LeftPane = styled.div`

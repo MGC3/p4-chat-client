@@ -39,6 +39,7 @@ const Container = styled.div`
   height: 550px;
   border: solid ${props => props.theme.XPblue};
   background: ${props => props.theme.grey};
+  z-index: 200;
 `;
 
 const Wrapper = styled.div`

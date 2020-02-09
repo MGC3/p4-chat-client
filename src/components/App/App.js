@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { AuthenticatedRoute } from '../AuthenticatedRoute';
 import { AutoDismissAlert, AlertContainer } from '../AutoDismissAlert';
 import { DesktopContainer } from '../DesktopContainer';
+import { IconGrid } from '../IconGrid';
 import { ChatContainer } from '../ChatContainer';
 import { SignIn, SignOut, SignUp, ChangePassword } from '../Auth';
 import { StartMenu } from '../StartMenu';
@@ -122,6 +123,7 @@ const App = ({ socket }) => {
           <SignOut alert={alert} clearUser={clearUser} user={user} />
         )}
       />
+      <IconGrid />
       {startMenuOpen && <StartMenu />}
       <TaskBar toggleStart={toggleStart} />
     </DesktopContainer>

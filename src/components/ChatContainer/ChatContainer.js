@@ -164,6 +164,7 @@ const Container = styled.div`
   border: solid ${props => props.theme.XPblue};
   background: ${props => props.theme.grey};
   position: absolute;
+  z-index: 200;
 `;
 
 /* TODO: abstract to common/shared components */
