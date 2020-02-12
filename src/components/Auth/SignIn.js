@@ -40,6 +40,29 @@ const SignIn = ({ alert, history, setUser }) => {
       });
   };
 
+  const onDemoSignIn = event => {
+    event.preventDefault();
+
+    signIn({ email: 'demo@demo', password: 'demo' })
+      .then(res => setUser(res.data.user))
+      .then(() =>
+        alert({
+          heading: 'Sign In Success',
+          message: messages.signInSuccess,
+          variant: 'success'
+        })
+      )
+      .then(() => history.push('/home'))
+      .catch(() => {
+        setFormData({ email: '', password: '' });
+        alert({
+          heading: 'Sign In Failed',
+          message: messages.signInFailure,
+          variant: 'danger'
+        });
+      });
+  };
+
   return (
     <Fragment>
       <Image />
@@ -55,9 +78,12 @@ const SignIn = ({ alert, history, setUser }) => {
             onChange={handleChange}
             tabIndex="1"
           />
-          <Link tabIndex="4" to="/sign-up">
+          <StyledLink tabIndex="4" to="/sign-up">
             Get an account
-          </Link>
+          </StyledLink>
+          <Button onClick={onDemoSignIn} variant="link" tabIndex="5">
+            Use Demo
+          </Button>
         </Form.Group>
         <Form.Group controlId="password">
           <Form.Label>Password</Form.Label>
@@ -87,4 +113,8 @@ const Image = styled.div`
   background-size: cover;
   background-image: url(${logo});
   background-color: rgba(255, 255, 255, 1);
+`;
+
+const StyledLink = styled(Link)`
+  margin-right: 16px;
 `;
