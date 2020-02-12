@@ -7,10 +7,10 @@ const ChatForm = ({ handleKeyPress, handleClick, inputRef }) => {
     <Fragment>
       <Input onKeyPress={e => handleKeyPress(e)} ref={inputRef} type="text" />
       <IconGroupChatRoom>
-        <TestIcon onClick={handleClick}>
-          <TestImage />
-          <TestText>Send</TestText>
-        </TestIcon>
+        <Icon onClick={handleClick}>
+          <Image />
+          <Text>Send</Text>
+        </Icon>
       </IconGroupChatRoom>
     </Fragment>
   );
@@ -41,7 +41,7 @@ const IconGroupChatRoom = styled.div`
   padding: 0 8px;
 `;
 
-const TestIcon = styled.div`
+const Icon = styled.div`
   width: 72px;
   height: 72px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.3);
@@ -49,12 +49,10 @@ const TestIcon = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Times', serif;
-
   cursor: pointer;
 `;
 
-const TestImage = styled.div`
+const Image = styled.div`
   width: 40px;
   height: 40px;
   margin: 0;
@@ -62,9 +60,8 @@ const TestImage = styled.div`
   background-image: url(${send});
 `;
 
-const TestText = styled.p`
-  color: black;
-  font-weight: 700;
+const Text = styled.p`
+  color: ${props => props.theme.black};
   margin: 0;
   padding: 0;
 `;
