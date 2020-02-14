@@ -9,7 +9,7 @@ const StartMenu = () => {
           <MenuItem>My Portfolio</MenuItem>
         </StyledLink>
         <StyledLink
-          href="https://www.michaelgchun.com/static/Michael-Chun-Resume-ebbdfcb3aecbb24b539bb64030285c9a.pdf"
+          href="https://www.michaelgchun.com/static/Michael-Chun-Resume-7d6d1dadf23409b832c24770e3dfc8a4.pdf"
           target="_blank"
         >
           <MenuItem>My Resume</MenuItem>
